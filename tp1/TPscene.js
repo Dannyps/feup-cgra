@@ -107,11 +107,12 @@ class TPscene extends CGFscene
 
         // Multiplication of the previous transformations
         //this.multMatrix(this.tra);     // GT = GT * tra
+        this.scale(5, 2, 1);
         this.translate(5,0,2);
         //this.multMatrix(this.rot);     // GT = GT * rot
         //this.rotate(Math.PI/180.0*30.0, 0, 1, 0);
         //this.multMatrix(this.sca);     // GT = GT * sca
-        this.scale(5, 2, 1);
+       
 
         // ---- END Geometric transformation section
         
