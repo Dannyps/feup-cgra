@@ -106,9 +106,10 @@ class TPscene extends CGFscene
         // ---- BEGIN Geometric transformation section
 
         // Multiplication of the previous transformations
-        //this.multMatrix(this.tra);     // GT = GT * tra
+        this.multMatrix(this.sca);     // GT = GT * sca
+        this.multMatrix(this.tra);     // GT = GT * tra
         //this.multMatrix(this.rot);     // GT = GT * rot
-        //this.multMatrix(this.sca);     // GT = GT * sca
+        
 
         // ---- END Geometric transformation section
         
