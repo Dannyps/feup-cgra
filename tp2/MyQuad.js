@@ -1,5 +1,6 @@
 /**
  * MyQuad
+ * @param gl {WebGLRenderingContext}
  * @constructor
  */
 class MyQuad extends CGFobject
@@ -7,7 +8,6 @@ class MyQuad extends CGFobject
 	constructor(scene) 
 	{
 		super(scene);
-
 		this.initBuffers();
 	};
 

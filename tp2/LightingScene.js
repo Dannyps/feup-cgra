@@ -70,6 +70,12 @@ class LightingScene extends CGFscene
 		this.lights[1].setPosition(10.5, 6.0, 1.0, 1.0);
 		this.lights[1].setVisible(true); // show marker on light position (different from enabled)
 
+		this.lights[2].setPosition(10.5, 6.0, 5.0, 1.0);
+		this.lights[2].setVisible(true); // show marker on light position (different from enabled)
+
+		this.lights[3].setPosition(4, 6, 5, 1);
+		this.lights[3].setVisible(true); // show marker on light position (different from enabled)
+
 		//this.lights[2].setPosition(10.5, 6.0, 5.0, 1.0);
 		//this.lights[1].setVisible(true); // show marker on light position (different from enabled)
 		//this.lights[3].setPosition(4, 6.0, 5.0, 1.0);
@@ -83,6 +89,22 @@ class LightingScene extends CGFscene
 		this.lights[1].setAmbient(0, 0, 0, 1);
 		this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
 		this.lights[1].enable();
+
+		this.lights[2].setAmbient(0, 0, 0, 1);
+		this.lights[2].setDiffuse(1.0, 1.0, 1.0, 1.0);
+		this.lights[2].setSpecular(1.0, 1.0, 1.0, 1.0);
+		this.lights[2].setConstantAttenuation(0.0);
+		this.lights[2].setLinearAttenuation(1.0);
+		this.lights[2].setQuadraticAttenuation(0.0);
+		this.lights[2].enable();
+
+		this.lights[3].setAmbient(0, 0, 0, 1);
+		this.lights[3].setDiffuse(1.0, 1.0, 1.0, 1.0);
+		this.lights[3].setSpecular(1.0, 1.0, 0, 1.0);
+		this.lights[3].setConstantAttenuation(0.0);
+		this.lights[3].setLinearAttenuation(0.0);
+		this.lights[3].setQuadraticAttenuation(0.2);
+		this.lights[3].enable();
 	};
 
 	updateLights() 
