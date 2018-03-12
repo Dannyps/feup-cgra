@@ -15,7 +15,7 @@ class MyTable extends CGFobject
         this.wood = new CGFappearance(this.scene);
 		this.wood.setAmbient(1,1,1,1);
 		this.wood.setDiffuse(139/255*0.8,70/255*0.8,8/255*0.8,1);
-		this.wood.setSpecular(0,0.2,0.8,1);
+		this.wood.setSpecular(0,0,0,1);
         this.wood.setShininess(120);
 
         this.steel = new CGFappearance(this.scene);
