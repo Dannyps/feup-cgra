@@ -31,7 +31,7 @@ class LightingScene extends CGFscene
 
 		// Scene elements
 		this.table = new MyTable(this);
-		this.wall = new Plane(this);
+		this.wall = new Plane(this, 30);
 		this.floor = new MyQuad(this);
 		this.chair = new MyChair(this);
 		
@@ -40,6 +40,12 @@ class LightingScene extends CGFscene
 
 		// Materials
 		this.materialDefault = new CGFappearance(this);
+
+		this.wood = new CGFappearance(this);
+		this.wood.setAmbient(1,1,1,1);
+		this.wood.setDiffuse(139/255,70/255,8/255,1);
+		this.wood.setSpecular(0,0.2,0.8,1);
+		this.wood.setShininess(120);
 		
 		this.materialA = new CGFappearance(this);
 		this.materialA.setAmbient(0.3,0.3,0.3,1);
@@ -197,6 +203,7 @@ class LightingScene extends CGFscene
 
 		// Chair 1
 		this.pushMatrix();
+			this.wood.apply();
 			this.translate(5,0,9.5);
 			this.chair.display();
 		this.popMatrix();
