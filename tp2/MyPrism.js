@@ -42,6 +42,8 @@ class MyPrism extends CGFobject
             this.vertices.push(Math.cos(angle));
             this.vertices.push(Math.sin(angle));
             this.vertices.push(0.5);
+
+            //repeat this vertix
             this.vertices.push(Math.cos(angle));
             this.vertices.push(Math.sin(angle));
             this.vertices.push(0.5);
@@ -52,9 +54,12 @@ class MyPrism extends CGFobject
             this.vertices.push(Math.cos(angle));
             this.vertices.push(Math.sin(angle));
             this.vertices.push(-0.5);
+
+            // repeat this vertix
             this.vertices.push(Math.cos(angle));
             this.vertices.push(Math.sin(angle));
             this.vertices.push(-0.5);
+
             angle+=angleIncrement;
         }
 
@@ -73,29 +78,28 @@ class MyPrism extends CGFobject
         this.indices = [];
 
 
-        for(var i = 0; i < this.slices; i++){
+        for(var i = 1; i < this.slices*2; i+=2){
             this.addToIndices(i);
-            this.addToIndices(i+this.slices);
-            if(i==this.slices-1){
-                this.addToIndices(this.slices);
+            this.addToIndices(i+this.slices*2);
+            if(i==this.slices*2-1){
+                this.addToIndices(this.slices*2);
             }else{
-                this.addToIndices(i+this.slices+1);
+                this.addToIndices(i+this.slices*2+1);
             }   
         }
+        console.log("Switch");
 
-        for(var i = 0; i < this.slices; i++){
-            if(i==this.slices-1){
-                this.addToIndices(i+1);
-            }else{
-                this.addToIndices(i+this.slices+1);
-            }
-
-            if(i==this.slices-1){
+        for(var i = 1; i < this.slices*2; i+=2){
+            if(i==this.slices*2-1){
+                this.addToIndices(this.slices*2);
                 this.addToIndices(0);
             }else{
+                this.addToIndices(i+this.slices*2+1);
                 this.addToIndices(i+1);
             }
+            
             this.addToIndices(i);
+            
         }
 
 		this.primitiveType = this.scene.gl.TRIANGLES;

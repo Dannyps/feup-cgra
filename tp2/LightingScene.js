@@ -34,7 +34,7 @@ class LightingScene extends CGFscene
 		this.wall = new Plane(this, 30);
 		this.floor = new MyQuad(this);
 		this.chair = new MyChair(this);
-		this.prism = new MyPrism(this, 100, 1);
+		this.prism = new MyPrism(this, 6, 1);
 		
 		this.boardA = new Plane(this, BOARD_A_DIVISIONS);
 		this.boardB = new Plane(this, BOARD_B_DIVISIONS);
@@ -152,7 +152,8 @@ class LightingScene extends CGFscene
 
 		// Floor
 		this.pushMatrix();
-			this.translate(2,2,2);
+			//this.translate(2,2,2);
+			this.scale(1,1,5);
 			this.prism.display();
 		this.popMatrix();
 
