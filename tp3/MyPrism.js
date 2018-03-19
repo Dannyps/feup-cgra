@@ -28,6 +28,18 @@ class MyPrism extends CGFobject
             this.addToIndices.counter=0;
         }
     };
+    addToNormals(v){
+        if ( typeof this.addToNormals.counter == 'undefined' ) {
+            // It has not... perform the initialization
+            this.addToNormals.counter = 0;
+        }
+        console.log("Adding normal "+v + " to prism.");
+        this.normals.push(v);
+        if(++this.addToNormals.counter==3){
+            console.log("\n");
+            this.addToNormals.counter=0;
+        }
+    };
 
     initBuffers() 
 	{
@@ -43,10 +55,16 @@ class MyPrism extends CGFobject
             this.vertices.push(Math.sin(angle));
             this.vertices.push(0.5);
 
-            //repeat this vertix
-            this.vertices.push(Math.cos(angle));
-            this.vertices.push(Math.sin(angle));
-            this.vertices.push(0.5);
+            if(i != 0){ //repeat this vertix
+                this.vertices.push(Math.cos(angle));
+                this.vertices.push(Math.sin(angle));
+                this.vertices.push(0.5);
+            }
+            if(i==this.slices-1){
+                this.vertices.push(Math.cos(0));
+                this.vertices.push(Math.sin(0));
+                this.vertices.push(0.5); 
+            }
             angle+=angleIncrement;
         }
 
@@ -55,51 +73,47 @@ class MyPrism extends CGFobject
             this.vertices.push(Math.sin(angle));
             this.vertices.push(-0.5);
 
-            // repeat this vertix
-            this.vertices.push(Math.cos(angle));
-            this.vertices.push(Math.sin(angle));
-            this.vertices.push(-0.5);
-
+            if(i != 0){ //repeat this vertix
+                this.vertices.push(Math.cos(angle));
+                this.vertices.push(Math.sin(angle));
+                this.vertices.push(-0.5);
+            }
+            if(i==this.slices-1){
+                this.vertices.push(Math.cos(0));
+                this.vertices.push(Math.sin(0));
+                this.vertices.push(-0.5); 
+            }
             angle+=angleIncrement;
         }
 
         
-
-
-        /*
-		this.normals = [
-			0,0,1,
-			0,0,1,
-			0,0,1,
-			0,0,1
-		];*/
+        this.normals = [];
+        angle=2*Math.PI/this.slices/2;
+        for(let i = 0; i <= this.slices*2; i++){
+            this.addToNormals(Math.cos(angle));
+            this.addToNormals(Math.sin(angle));
+            this.addToNormals(0);
+            this.addToNormals(Math.cos(angle));
+            this.addToNormals(Math.sin(angle));
+            this.addToNormals(0);
+            angle+=angleIncrement;
+        }
 
         // Define indices
         this.indices = [];
 
 
-        for(var i = 1; i < this.slices*2; i+=2){
+        for(var i = 0; i < this.slices*2; i+=2){
+            this.addToIndices(i+1);
             this.addToIndices(i);
             this.addToIndices(i+this.slices*2);
-            if(i==this.slices*2-1){
-                this.addToIndices(this.slices*2);
-            }else{
-                this.addToIndices(i+this.slices*2+1);
-            }   
         }
         console.log("Switch");
 
-        for(var i = 1; i < this.slices*2; i+=2){
-            if(i==this.slices*2-1){
-                this.addToIndices(this.slices*2);
-                this.addToIndices(0);
-            }else{
-                this.addToIndices(i+this.slices*2+1);
-                this.addToIndices(i+1);
-            }
-            
-            this.addToIndices(i);
-            
+        for(var i = 0; i < this.slices*2; i+=2){
+            this.addToIndices(i+this.slices*2);
+            this.addToIndices(i+this.slices*2+1);
+            this.addToIndices(i+1);
         }
 
 		this.primitiveType = this.scene.gl.TRIANGLES;
