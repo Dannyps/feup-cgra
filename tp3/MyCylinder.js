@@ -4,7 +4,7 @@
  * @constructor
  */
 
-class MyPrism extends CGFobject
+class MyCylinder extends CGFobject
 {
 	constructor(scene, slices, stacks) 
 	{
@@ -12,7 +12,6 @@ class MyPrism extends CGFobject
         this.slices = slices;
         this.stacks = stacks;
         
-        this.debug=false;
         this.initBuffers();
 
     };
@@ -23,10 +22,10 @@ class MyPrism extends CGFobject
             this.addToIndices.counter = 0;
             this.addToIndices.counterT = 0;
         }
-        if(this.debug) console.log("Adding "+Math.floor(this.addToIndices.counterT++/3) +"th index "+v + " to prism.");
+        console.log("Adding "+Math.floor(this.addToIndices.counterT++/3) +"th index "+v + " to cylinder.");
         this.indices.push(v);
         if(++this.addToIndices.counter==3){
-            if(this.debug) console.log("\n");
+            console.log("\n");
             this.addToIndices.counter=0;
         }
     };
@@ -35,10 +34,10 @@ class MyPrism extends CGFobject
             // It has not... perform the initialization
             this.addToNormals.counter = 0;
         }
-        if(this.debug)  console.log("Adding normal "+v + " to prism.");
+        console.log("Adding normal "+v + " to cylinder.");
         this.normals.push(v);
         if(++this.addToNormals.counter==3){
-            if(this.debug) console.log("\n");
+            console.log("\n");
             this.addToNormals.counter=0;
         }
     };
@@ -48,10 +47,10 @@ class MyPrism extends CGFobject
             this.addToVertices.counter = 0;
             this.addToVertices.counterT = 0;
         }
-        if(this.debug) console.log("Adding "+Math.floor(this.addToVertices.counterT++/3) +"th vertix "+v + " to prism.");
+        console.log("Adding "+Math.floor(this.addToVertices.counterT++/3) +"th vertix "+v + " to cylinder.");
         this.vertices.push(v);
         if(++this.addToVertices.counter==3){
-            if(this.debug) console.log("\n");
+            console.log("\n");
             this.addToVertices.counter=0;
         }
     };
@@ -95,7 +94,7 @@ class MyPrism extends CGFobject
 
         
        this.normals = [];
-        let angle=2*Math.PI/this.slices/2;
+        let angle=0;
         for(let i = 0; i <= this.slices*this.stacks*2; i++){
             this.addToNormals(Math.cos(angle));
             this.addToNormals(Math.sin(angle));

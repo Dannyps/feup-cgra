@@ -34,7 +34,8 @@ class LightingScene extends CGFscene
 		this.wall = new Plane(this, 30);
 		this.floor = new MyQuad(this);
 		this.chair = new MyChair(this);
-		this.prism = new MyPrism(this, 6, 30);
+		this.prism = new MyPrism(this, 8, 20);
+		this.cyl = new MyCylinder(this, 80, 20);
 		
 		this.boardA = new Plane(this, BOARD_A_DIVISIONS);
 		this.boardB = new Plane(this, BOARD_B_DIVISIONS);
@@ -89,7 +90,7 @@ class LightingScene extends CGFscene
 		//this.lights[3].setPosition(4, 6.0, 5.0, 1.0);
 		//this.lights[1].setVisible(true); // show marker on light position (different from enabled)
 
-		this.lights[0].setAmbient(0, 0, 0, 1);
+		this.lights[0].setAmbient(0.3, 0.3, 0.3, 1);
 		this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
 		this.lights[0].setSpecular(1.0, 1.0, 0, 1.0);
 		this.lights[0].enable();
@@ -155,6 +156,13 @@ class LightingScene extends CGFscene
 			//this.translate(2,2,2);
 			this.scale(1,1,5);
 			this.prism.display();
+		this.popMatrix();
+
+		this.pushMatrix();
+			//this.translate(2,2,2);
+			this.scale(1,1,5);
+			this.translate(3,0,0);
+			this.cyl.display();
 		this.popMatrix();
 
 		/*// Floor
