@@ -20,8 +20,9 @@ class MyPrism extends CGFobject
         if ( typeof this.addToIndices.counter == 'undefined' ) {
             // It has not... perform the initialization
             this.addToIndices.counter = 0;
+            this.addToIndices.counterT = 0;
         }
-        console.log("Adding index "+v + " to prism.");
+        console.log("Adding "+Math.floor(this.addToIndices.counterT++/3) +"th index "+v + " to prism.");
         this.indices.push(v);
         if(++this.addToIndices.counter==3){
             console.log("\n");
@@ -40,56 +41,61 @@ class MyPrism extends CGFobject
             this.addToNormals.counter=0;
         }
     };
+    addToVertices(v){
+        if ( typeof this.addToVertices.counter == 'undefined' ) {
+            // It has not... perform the initialization
+            this.addToVertices.counter = 0;
+            this.addToVertices.counterT = 0;
+        }
+        console.log("Adding "+Math.floor(this.addToVertices.counterT++/3) +"th vertix "+v + " to prism.");
+        this.vertices.push(v);
+        if(++this.addToVertices.counter==3){
+            console.log("\n");
+            this.addToVertices.counter=0;
+        }
+    };
 
     initBuffers() 
 	{
-        let angle = 0;
-        let angleIncrement=2*Math.PI/this.slices;
-
+       
 
         // Define vertices
         this.vertices = [];
+        let angleIncrement=2*Math.PI/this.slices;
+        let zInc=1/this.stacks;
+        let z = 0.5;
+        for(let i = 0; i <= this.stacks; i++){
+            console.log(z);
+            let angle = 0;
+            
 
-        for(let i = 0; i < this.slices; i++){
-            this.vertices.push(Math.cos(angle));
-            this.vertices.push(Math.sin(angle));
-            this.vertices.push(0.5);
-
-            if(i != 0){ //repeat this vertix
-                this.vertices.push(Math.cos(angle));
-                this.vertices.push(Math.sin(angle));
-                this.vertices.push(0.5);
+            for(let j = 0; j < this.slices; j++){
+                this.addToVertices(Math.cos(angle));
+                this.addToVertices(Math.sin(angle));
+                this.addToVertices(z);
+    
+                if(j != 0){ //repeat this vertix
+                    this.addToVertices(Math.cos(angle));
+                    this.addToVertices(Math.sin(angle));
+                    this.addToVertices(z);
+                }
+                if(j==this.slices-1){
+                    this.addToVertices(Math.cos(0));
+                    this.addToVertices(Math.sin(0));
+                    this.addToVertices(z); 
+                }
+                angle+=angleIncrement;
             }
-            if(i==this.slices-1){
-                this.vertices.push(Math.cos(0));
-                this.vertices.push(Math.sin(0));
-                this.vertices.push(0.5); 
-            }
-            angle+=angleIncrement;
-        }
-
-        for(let i = 0; i < this.slices; i++){
-            this.vertices.push(Math.cos(angle));
-            this.vertices.push(Math.sin(angle));
-            this.vertices.push(-0.5);
-
-            if(i != 0){ //repeat this vertix
-                this.vertices.push(Math.cos(angle));
-                this.vertices.push(Math.sin(angle));
-                this.vertices.push(-0.5);
-            }
-            if(i==this.slices-1){
-                this.vertices.push(Math.cos(0));
-                this.vertices.push(Math.sin(0));
-                this.vertices.push(-0.5); 
-            }
-            angle+=angleIncrement;
+            z-=zInc;
         }
 
         
-        this.normals = [];
-        angle=2*Math.PI/this.slices/2;
-        for(let i = 0; i <= this.slices*2; i++){
+    
+
+        
+       this.normals = [];
+        let angle=2*Math.PI/this.slices/2;
+        for(let i = 0; i <= this.slices*this.stacks*2; i++){
             this.addToNormals(Math.cos(angle));
             this.addToNormals(Math.sin(angle));
             this.addToNormals(0);
@@ -102,18 +108,24 @@ class MyPrism extends CGFobject
         // Define indices
         this.indices = [];
 
+        for(let i = 0; i < this.stacks;i++){
+            
+            console.log("%cStack "+i, "color:#0aa");
 
-        for(var i = 0; i < this.slices*2; i+=2){
-            this.addToIndices(i+1);
-            this.addToIndices(i);
-            this.addToIndices(i+this.slices*2);
-        }
-        console.log("Switch");
+            for(var j = i*this.slices*2; j < this.slices*(i+1)*2; j+=2){
+                this.addToIndices(j+1);
+                this.addToIndices(j);
+                this.addToIndices(j+this.slices*2);
+            }
+            //debugger;
+            console.log("%cSwitch", "color:#f00");
 
-        for(var i = 0; i < this.slices*2; i+=2){
-            this.addToIndices(i+this.slices*2);
-            this.addToIndices(i+this.slices*2+1);
-            this.addToIndices(i+1);
+            for(var j = i*this.slices*2; j < this.slices*(i+1)*2; j+=2){
+                this.addToIndices(j+this.slices*2);
+                this.addToIndices(j+this.slices*2+1);
+                this.addToIndices(j+1);
+            }
+            //debugger;
         }
 
 		this.primitiveType = this.scene.gl.TRIANGLES;
