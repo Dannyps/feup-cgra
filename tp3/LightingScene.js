@@ -35,7 +35,7 @@ class LightingScene extends CGFscene
 		this.floor = new MyQuad(this);
 		this.chair = new MyChair(this);
 		this.prism = new MyPrism(this, 8, 20);
-		this.cyl = new MyCylinder(this, 80, 20);
+		this.cyl = new MyCylinder(this, 8, 20);
 		
 		this.boardA = new Plane(this, BOARD_A_DIVISIONS);
 		this.boardB = new Plane(this, BOARD_B_DIVISIONS);

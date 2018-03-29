@@ -73,17 +73,6 @@ class MyCylinder extends CGFobject
                 this.addToVertices(Math.cos(angle));
                 this.addToVertices(Math.sin(angle));
                 this.addToVertices(z);
-    
-                if(j != 0){ //repeat this vertix
-                    this.addToVertices(Math.cos(angle));
-                    this.addToVertices(Math.sin(angle));
-                    this.addToVertices(z);
-                }
-                if(j==this.slices-1){
-                    this.addToVertices(Math.cos(0));
-                    this.addToVertices(Math.sin(0));
-                    this.addToVertices(z); 
-                }
                 angle+=angleIncrement;
             }
             z-=zInc;
@@ -99,9 +88,6 @@ class MyCylinder extends CGFobject
             this.addToNormals(Math.cos(angle));
             this.addToNormals(Math.sin(angle));
             this.addToNormals(0);
-            this.addToNormals(Math.cos(angle));
-            this.addToNormals(Math.sin(angle));
-            this.addToNormals(0);
             angle+=angleIncrement;
         }
 
@@ -112,18 +98,35 @@ class MyCylinder extends CGFobject
             
             console.log("%cStack "+i, "color:#0aa");
 
-            for(var j = i*this.slices*2; j < this.slices*(i+1)*2; j+=2){
-                this.addToIndices(j+1);
+            for(var j = i*this.slices; j < this.slices*(i+1); j++){
+                if(j+1==this.slices*(i+1)){
+                    this.addToIndices(i*this.slices);
+                }else{
+                    this.addToIndices(j+1);
+                }
                 this.addToIndices(j);
-                this.addToIndices(j+this.slices*2);
+                this.addToIndices(j+this.slices);
             }
             //debugger;
             console.log("%cSwitch", "color:#f00");
 
-            for(var j = i*this.slices*2; j < this.slices*(i+1)*2; j+=2){
-                this.addToIndices(j+this.slices*2);
-                this.addToIndices(j+this.slices*2+1);
-                this.addToIndices(j+1);
+            for(var j = i*this.slices; j < this.slices*(i+1); j++){
+                                
+                this.addToIndices(j+this.slices);
+                
+                if(j+this.slices+1==this.slices*(i+2)){
+                    this.addToIndices((i+1)*this.slices);
+                }else{
+                    this.addToIndices(j+this.slices+1);
+                }
+
+                if(j+1==this.slices*(i+1)){
+                    this.addToIndices(i*this.slices);
+                }else{
+                    this.addToIndices(j+1);
+                }
+
+                
             }
             //debugger;
         }
