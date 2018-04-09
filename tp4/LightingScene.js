@@ -43,11 +43,11 @@ class LightingScene extends CGFscene
 		// Materials
 		this.materialDefault = new CGFappearance(this);
 
-		this.wood = new CGFappearance(this);
-		this.wood.setAmbient(1,1,1,1);
+        this.wood = new CGFappearance(this);
+		this.wood.setAmbient(0.2,0.2,0.2,0.0);
 		this.wood.setDiffuse(139/255,70/255,8/255,1);
 		this.wood.setSpecular(0,0,0,1);
-		this.wood.setShininess(120);
+        this.wood.setShininess(120);
 		
 		this.materialA = new CGFappearance(this);
 		this.materialA.setAmbient(0.3,0.3,0.3,1);
@@ -60,7 +60,8 @@ class LightingScene extends CGFscene
 		this.materialB.setDiffuse(0.6,0.6,0.6,1);
 		this.materialB.setSpecular(0.8,0.8,0.8,1);	
 		this.materialB.setShininess(120);
-		
+
+		this.enableTextures(true);	
 	};
 
 	initCameras() 
@@ -151,7 +152,7 @@ class LightingScene extends CGFscene
 		// ---- BEGIN Scene drawing section
 
 
-		// Floor
+		// Prism
 		this.pushMatrix();
 			this.translate(1.2,2,10);
 			this.rotate(Math.PI*1/4,1,0,0);
@@ -160,10 +161,11 @@ class LightingScene extends CGFscene
 			this.prism.display();
 		this.popMatrix();
 
+		// Cyl
 		this.pushMatrix();
-		this.translate(1.2,2,5);
-		this.rotate(Math.PI*3/4,1,0,0);
-		this.scale(1,1,5);
+			this.translate(1.2,2,5);
+			this.rotate(Math.PI*3/4,1,0,0);
+			this.scale(1,1,5);
 			this.cyl.display();
 		this.popMatrix();
 
