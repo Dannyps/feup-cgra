@@ -77,6 +77,21 @@ class LightingScene extends CGFscene
 		this.materialB.setSpecular(0.8,0.8,0.8,1);	
 		this.materialB.setShininess(120);
 
+		this.slideAppearance = new CGFappearance(this);
+		this.slideAppearance.loadTexture("../resources/images/slides.png");
+		this.slideAppearance.setAmbient(0.2,0.2,0.2,0.0);
+		this.slideAppearance.setDiffuse(0.7, 0.7, 0.8,1);
+		this.slideAppearance.setSpecular(0,0,0,1);
+		this.slideAppearance.setShininess(1200);
+
+		this.boardAppearance = new CGFappearance(this);
+		this.boardAppearance.loadTexture("../resources/images/board.png");
+		this.boardAppearance.setAmbient(0.2,0.2,0.2,0.0);
+		this.boardAppearance.setDiffuse(0.2, 0.2, 0.2, 1);
+		this.boardAppearance.setSpecular(0.5, 0.5, 0.5,1);
+		this.boardAppearance.setShininess(1);
+
+
 		this.enableTextures(true);	
 	};
 
@@ -234,8 +249,7 @@ class LightingScene extends CGFscene
 		this.pushMatrix();
 			this.translate(4, 4.5, 0.2);
 			this.scale(BOARD_WIDTH, BOARD_HEIGHT, 1);
-			
-			this.materialA.apply();
+			this.slideAppearance.apply();
 			this.boardA.display();
 		this.popMatrix();
 
@@ -243,8 +257,7 @@ class LightingScene extends CGFscene
 		this.pushMatrix();
 			this.translate(10.5, 4.5, 0.2);
 			this.scale(BOARD_WIDTH, BOARD_HEIGHT, 1);
-			
-			this.materialB.apply();
+			this.boardAppearance.apply();
 			this.boardB.display();
 		this.popMatrix();
 
