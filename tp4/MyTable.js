@@ -16,9 +16,7 @@ class MyTable extends CGFobject
 		this.tableAppearance.loadTexture("../resources/images/table.png");
 		this.tableAppearance.setSpecular(0,0,0,0);
 		this.tableAppearance.setDiffuse(0.4,0.4,0.4,1);
-        this.tableAppearance.setShininess(0.1);
-        this.tableAppearance.setTextureWrap( CGFappearance.MIRRORED_REPEAT, CGFappearance.MIRRORED_REPEAT );
-        
+        this.tableAppearance.setShininess(0.1);        
 
         this.wood = new CGFappearance(this.scene);
 		this.wood.setAmbient(1,1,1,1);
@@ -27,9 +25,9 @@ class MyTable extends CGFobject
         this.wood.setShininess(120);
 
         this.steel = new CGFappearance(this.scene);
-		//this.steel.setAmbient(1,1,1,1);
-		this.steel.setDiffuse(0.1,0.1,0.1,1);
-		this.steel.setSpecular(0.8,0.8,0.8,1);
+		this.steel.setAmbient(224/255/5, 223/255/5, 219/255/5, 1);
+		this.steel.setDiffuse(224/255, 223/255, 219/255,1);
+		this.steel.setSpecular(224/255, 223/255, 219/255,1);
         this.steel.setShininess(120);
         
         this.quad.initBuffers();

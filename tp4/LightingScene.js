@@ -31,8 +31,8 @@ class LightingScene extends CGFscene
 
 		// Scene elements
 		this.table = new MyTable(this);
-		this.wall = new Plane(this, 30);
-		this.floor = new MyQuad(this);
+		this.wall = new MyQuad(this, -2, 3, -0.5, 2.5);
+		this.floor = new MyQuad(this, 0, 10, 0, 12);
 		this.chair = new MyChair(this);
 		this.prism = new MyPrism(this, 8, 20);
 		this.cyl = new MyCylinder(this, 8, 20);
@@ -44,10 +44,26 @@ class LightingScene extends CGFscene
 		this.materialDefault = new CGFappearance(this);
 
         this.wood = new CGFappearance(this);
-		this.wood.setAmbient(0.2,0.2,0.2,0.0);
+		this.wood.setAmbient(139/255*0.5,70/255*0.5,8/255*0.5,1);
 		this.wood.setDiffuse(139/255,70/255,8/255,1);
-		this.wood.setSpecular(0,0,0,1);
-        this.wood.setShininess(120);
+		this.wood.setSpecular(0,0,0,0);
+		this.wood.setShininess(120);
+		
+		this.floorAppearance = new CGFappearance(this);
+		this.floorAppearance.loadTexture("../resources/images/floor.png");
+		this.floorAppearance.setAmbient(0.2,0.2,0.2,0.0);
+		this.floorAppearance.setDiffuse(139/255,70/255,8/255,1);
+		this.floorAppearance.setSpecular(0,0,0,1);
+		this.floorAppearance.setShininess(120);
+
+		this.windowAppearance = new CGFappearance(this);
+		this.windowAppearance.loadTexture("../resources/images/window.png");
+		this.windowAppearance.setAmbient(0.2,0.2,0.2,0.0);
+		this.windowAppearance.setDiffuse(0.5,0.5,0.5,1);
+		this.windowAppearance.setSpecular(0,0,0,1);
+		this.windowAppearance.setShininess(120);
+		this.windowAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+				
 		
 		this.materialA = new CGFappearance(this);
 		this.materialA.setAmbient(0.3,0.3,0.3,1);
@@ -86,6 +102,9 @@ class LightingScene extends CGFscene
 		this.lights[3].setPosition(4, 6, 5, 1);
 		this.lights[3].setVisible(true); // show marker on light position (different from enabled)
 
+		this.lights[4].setPosition(0.4, 6, 8, 1);
+		this.lights[4].setVisible(false); // show marker on light position (different from enabled)
+
 		//this.lights[2].setPosition(10.5, 6.0, 5.0, 1.0);
 		//this.lights[1].setVisible(true); // show marker on light position (different from enabled)
 		//this.lights[3].setPosition(4, 6.0, 5.0, 1.0);
@@ -94,11 +113,11 @@ class LightingScene extends CGFscene
 		this.lights[0].setAmbient(0.3, 0.3, 0.3, 1);
 		this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
 		this.lights[0].setSpecular(1.0, 1.0, 0, 1.0);
-		this.lights[0].enable();
+		//this.lights[0].enable();
 
 		this.lights[1].setAmbient(0, 0, 0, 1);
 		this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
-		this.lights[1].enable();
+		//this.lights[1].enable();
 
 		this.lights[2].setAmbient(0, 0, 0, 1);
 		this.lights[2].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -106,7 +125,7 @@ class LightingScene extends CGFscene
 		this.lights[2].setConstantAttenuation(0.0);
 		this.lights[2].setLinearAttenuation(1.0);
 		this.lights[2].setQuadraticAttenuation(0.0);
-		this.lights[2].enable();
+		//this.lights[2].enable();
 
 		this.lights[3].setAmbient(0, 0, 0, 1);
 		this.lights[3].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -114,7 +133,12 @@ class LightingScene extends CGFscene
 		this.lights[3].setConstantAttenuation(0.0);
 		this.lights[3].setLinearAttenuation(0.0);
 		this.lights[3].setQuadraticAttenuation(0.2);
-		this.lights[3].enable();
+		//this.lights[3].enable();
+
+		this.lights[4].setAmbient(1, 1, 1, 1);
+		this.lights[4].setDiffuse(2, 2, 2/1.5, 1.0);
+		this.lights[4].setSpecular(0.5, 0.5, 0.5/3, 1.0);
+		this.lights[4].enable();
 	};
 
 	updateLights() 
@@ -174,6 +198,7 @@ class LightingScene extends CGFscene
 			this.translate(7.5, 0, 7.5);
 			this.rotate(-90 * degToRad, 1, 0, 0);
 			this.scale(15, 15, 0.2);
+			this.floorAppearance.apply();
 			this.floor.display();
 		this.popMatrix();
 
@@ -182,6 +207,7 @@ class LightingScene extends CGFscene
 			this.translate(0, 4, 7.5);
 			this.rotate(90 * degToRad, 0, 1, 0);
 			this.scale(15, 8, 0.2);
+			this.windowAppearance.apply();
 			this.wall.display();
 		this.popMatrix();
 

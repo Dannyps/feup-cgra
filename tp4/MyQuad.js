@@ -5,20 +5,25 @@
  */
 class MyQuad extends CGFobject
 {
-	constructor(scene) 
+	constructor(scene, minS, maxS, minT, maxT) 
 	{
 		super(scene);
+		this.minS = minS;
+		this.maxS = maxS;
+		this.minT = minT;
+		this.maxT = maxT;
+		
 		this.initBuffers();
+
 	};
 
 	initBuffers() 
 	{
-
 		this.texCoords = [
-			1, 0,
-			1, 1,
-			0, 0,
-			0, 1
+			this.minS, this.maxT,
+			this.maxS, this.maxT,
+			this.minS, this.minT,
+			this.maxS, this.minT
 			];
 
 			
