@@ -13,6 +13,15 @@ class MyQuad extends CGFobject
 
 	initBuffers() 
 	{
+
+		this.texCoords = [
+			1, 0,
+			1, 1,
+			0, 0,
+			0, 1
+			];
+
+			
 		this.vertices = [
 			-0.5, -0.5, 0, //0
 			0.5, -0.5, 0,  //1
