@@ -32,10 +32,10 @@ class LightingScene extends CGFscene
 		// Scene elements
 		this.table = new MyTable(this);
 		this.wall = new MyQuad(this, -2, 3, -0.5, 2.5);
-		this.floor = new MyQuad(this, 0, 10, 0, 12);
+		this.floor = new MyQuad(this, 0, 10, 1, 12);
 		this.chair = new MyChair(this);
-		this.prism = new MyPrism(this, 8, 20);
-		this.cyl = new MyCylinder(this, 8, 20);
+		//this.prism = new MyPrism(this, 8, 20);
+		this.cyl = new MyCylinder(this, 20, 20, 2, 1);
 		
 		this.boardA = new Plane(this, BOARD_A_DIVISIONS, 1.5, 0.25);
 		this.boardB = new Plane(this, BOARD_B_DIVISIONS);
@@ -55,6 +55,15 @@ class LightingScene extends CGFscene
 		this.floorAppearance.setDiffuse(139/255,70/255,8/255,1);
 		this.floorAppearance.setSpecular(0,0,0,1);
 		this.floorAppearance.setShininess(120);
+		this.floorAppearance.setTextureWrap('REPEAT', 'REPEAT');
+
+		this.columnAppearance = new CGFappearance(this);
+		this.columnAppearance.loadTexture("../resources/images/col.png");
+		this.columnAppearance.setAmbient(0.5,0.5,0.6,0.0);
+		this.columnAppearance.setDiffuse(0.8,0.8,0.9,1);
+		this.columnAppearance.setSpecular(0.1,0.1,0.1,1);
+		this.columnAppearance.setShininess(120);
+		this.columnAppearance.setTextureWrap('REPEAT', 'REPEAT');
 
 		this.windowAppearance = new CGFappearance(this);
 		this.windowAppearance.loadTexture("../resources/images/window.png");
@@ -193,6 +202,7 @@ class LightingScene extends CGFscene
 
 
 		// Prism
+		/*
 		this.pushMatrix();
 			this.translate(1.2,2,10);
 			this.rotate(Math.PI*1/4,1,0,0);
@@ -200,12 +210,15 @@ class LightingScene extends CGFscene
 			
 			this.prism.display();
 		this.popMatrix();
-
+*/
 		// Cyl
 		this.pushMatrix();
-			this.translate(1.2,2,5);
-			this.rotate(Math.PI*3/4,1,0,0);
-			this.scale(1,1,5);
+			this.columnAppearance.apply();
+			this.translate(1.2,3,13.8);
+			this.rotate(Math.PI*2/4,1,0,0);
+			this.scale(0.6,0.6,6);
+			this.cyl.display();
+			this.translate(21,0,0);
 			this.cyl.display();
 		this.popMatrix();
 

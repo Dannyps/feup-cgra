@@ -78,11 +78,8 @@ class MyCylinder extends CGFobject
             z-=zInc;
         }
 
-        
-    
-
-        
-       this.normals = [];
+                
+        this.normals = [];
         let angle=0;
         for(let i = 0; i <= this.slices*this.stacks*2; i++){
             this.addToNormals(Math.cos(angle));

@@ -6,11 +6,13 @@
 
 class MyCylinder extends CGFobject
 {
-	constructor(scene, slices, stacks) 
+	constructor(scene, slices, stacks, sr = 1, tr = 1) 
 	{
         super(scene);
         this.slices = slices;
         this.stacks = stacks;
+        this.sr=sr;
+        this.tr=tr;
         
         this.initBuffers();
 
@@ -24,6 +26,7 @@ class MyCylinder extends CGFobject
         }
         console.log("Adding "+Math.floor(this.addToIndices.counterT++/3) +"th index "+v + " to cylinder.");
         this.indices.push(v);
+
         if(++this.addToIndices.counter==3){
             console.log("\n");
             this.addToIndices.counter=0;
@@ -57,10 +60,9 @@ class MyCylinder extends CGFobject
 
     initBuffers() 
 	{
-       
-
         // Define vertices
         this.vertices = [];
+        
         let angleIncrement=2*Math.PI/this.slices;
         let zInc=1/this.stacks;
         let z = 0.5;
@@ -78,11 +80,7 @@ class MyCylinder extends CGFobject
             z-=zInc;
         }
 
-        
-    
-
-        
-       this.normals = [];
+        this.normals = [];
         let angle=0;
         for(let i = 0; i <= this.slices*this.stacks*2; i++){
             this.addToNormals(Math.cos(angle));
@@ -96,7 +94,6 @@ class MyCylinder extends CGFobject
 
         for(let i = 0; i < this.stacks;i++){
             
-            console.log("%cStack "+i, "color:#0aa");
 
             for(var j = i*this.slices; j < this.slices*(i+1); j++){
                 if(j+1==this.slices*(i+1)){
@@ -108,7 +105,6 @@ class MyCylinder extends CGFobject
                 this.addToIndices(j+this.slices);
             }
             //debugger;
-            console.log("%cSwitch", "color:#f00");
 
             for(var j = i*this.slices; j < this.slices*(i+1); j++){
                                 
@@ -131,7 +127,19 @@ class MyCylinder extends CGFobject
             //debugger;
         }
 
-		this.primitiveType = this.scene.gl.TRIANGLES;
+        this.texCoords = [];
+
+        for(let i = 0; i<=this.stacks;i++){
+            let t=(this.stacks-i)/this.stacks;
+            for(let j = 0; j < this.slices;j++){
+                let s=(this.slices-1-j)/(this.slices-1);
+                this.texCoords.push(s*this.sr,t*this.tr);
+            }
+        }
+
+        console.log(this.texCoords);
+    
+        this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
 	};
 };
