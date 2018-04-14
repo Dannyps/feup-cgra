@@ -37,7 +37,7 @@ class LightingScene extends CGFscene
 		this.prism = new MyPrism(this, 8, 20);
 		this.cyl = new MyCylinder(this, 8, 20);
 		
-		this.boardA = new Plane(this, BOARD_A_DIVISIONS);
+		this.boardA = new Plane(this, BOARD_A_DIVISIONS, 1.5, 0.25);
 		this.boardB = new Plane(this, BOARD_B_DIVISIONS);
 
 		// Materials
@@ -83,6 +83,7 @@ class LightingScene extends CGFscene
 		this.slideAppearance.setDiffuse(0.7, 0.7, 0.8,1);
 		this.slideAppearance.setSpecular(0,0,0,1);
 		this.slideAppearance.setShininess(1200);
+		this.slideAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
 
 		this.boardAppearance = new CGFappearance(this);
 		this.boardAppearance.loadTexture("../resources/images/board.png");
