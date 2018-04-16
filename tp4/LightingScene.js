@@ -244,6 +244,7 @@ class LightingScene extends CGFscene
 		this.pushMatrix();
 			this.translate(7.5, 4, 0);
 			this.scale(15, 8, 0.2);
+			this.floorAppearance.apply();
 			this.wall.display();
 		this.popMatrix();
 
