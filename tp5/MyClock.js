@@ -41,6 +41,36 @@ class MyClock extends CGFobject{
         this.face.display();
     this.scene.popMatrix();
 
+/*
+//				PONTEIRO_H
+    	this.ponteiroH.setAngle(90);
+
+    	this.scene.pushMatrix();
+    	this.scene.translate(0,0,0.25);
+	    this.scene.rotate(-this.ponteiroH.anglerad,0,0,1);
+    	this.scene.scale(1,0.5,1);
+    	this.ponteiroH.display();
+    	this.scene.popMatrix();
+
+    	//			PONTEIRO_M
+    	this.ponteiroM.setAngle(180);
+
+    	this.scene.pushMatrix();
+    	this.scene.translate(0,0,0.25);
+	    this.scene.rotate(-this.ponteiroM.anglerad,0,0,1);
+    	this.scene.scale(1,0.8,1)
+    	this.ponteiroM.display();
+    	this.scene.popMatrix();
+
+    	//			PONTEIRO_S
+    	this.ponteiroS.setAngle(270);
+
+    	this.scene.pushMatrix();
+    	this.scene.translate(0,0,0.25);
+	    this.scene.rotate(-this.ponteiroS.anglerad,0,0,1);
+    	this.ponteiroS.display();
+    	this.scene.popMatrix();
+*/
 
     }
 
