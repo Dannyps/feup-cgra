@@ -24,11 +24,11 @@ class MyCylinder extends CGFobject
             this.addToIndices.counter = 0;
             this.addToIndices.counterT = 0;
         }
-        console.log("Adding "+Math.floor(this.addToIndices.counterT++/3) +"th index "+v + " to cylinder.");
+        //console.log("Adding "+Math.floor(this.addToIndices.counterT++/3) +"th index "+v + " to cylinder.");
         this.indices.push(v);
 
         if(++this.addToIndices.counter==3){
-            console.log("\n");
+            //console.log("\n");
             this.addToIndices.counter=0;
         }
     };
@@ -37,10 +37,10 @@ class MyCylinder extends CGFobject
             // It has not... perform the initialization
             this.addToNormals.counter = 0;
         }
-        console.log("Adding normal "+v + " to cylinder.");
+        //console.log("Adding normal "+v + " to cylinder.");
         this.normals.push(v);
         if(++this.addToNormals.counter==3){
-            console.log("\n");
+            //console.log("\n");
             this.addToNormals.counter=0;
         }
     };
@@ -50,10 +50,10 @@ class MyCylinder extends CGFobject
             this.addToVertices.counter = 0;
             this.addToVertices.counterT = 0;
         }
-        console.log("Adding "+Math.floor(this.addToVertices.counterT++/3) +"th vertix "+v + " to cylinder.");
+        //console.log("Adding "+Math.floor(this.addToVertices.counterT++/3) +"th vertix "+v + " to cylinder.");
         this.vertices.push(v);
         if(++this.addToVertices.counter==3){
-            console.log("\n");
+            //console.log("\n");
             this.addToVertices.counter=0;
         }
     };
@@ -67,7 +67,7 @@ class MyCylinder extends CGFobject
         let zInc=1/this.stacks;
         let z = 0.5;
         for(let i = 0; i <= this.stacks; i++){
-            console.log(z);
+            //console.log(z);
             let angle = 0;
             
 
@@ -137,7 +137,7 @@ class MyCylinder extends CGFobject
             }
         }
 
-        console.log(this.texCoords);
+        //console.log(this.texCoords);
     
         this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
