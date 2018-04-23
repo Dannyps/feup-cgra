@@ -41,6 +41,9 @@ class LightingScene extends CGFscene
 		this.boardA = new Plane(this, BOARD_A_DIVISIONS, 1.5, 0.25);
 		this.boardB = new Plane(this, BOARD_B_DIVISIONS);
 
+
+		this.plane = new MyPaperPlaneH(this, 12, 3.7, 8); //TODO: translate
+
 		// Materials
 		this.materialDefault = new CGFappearance(this);
 
@@ -310,8 +313,13 @@ class LightingScene extends CGFscene
 			this.clock.display();
 		this.popMatrix();
 
+		// Plane
+		this.pushMatrix();
+			this.plane.display();
+		this.popMatrix();
+
 		// ---- END Scene drawing section
-		this.setUpdatePeriod(100);
+		this.setUpdatePeriod(1000/60);
 	};
 
 
@@ -324,6 +332,7 @@ class LightingScene extends CGFscene
     	this.time = this.delta/1000;
     	this.oldTime=currTime;
 		this.clock.update(this.time);
+		this.plane.update(this.time);
 	};
 
 };
