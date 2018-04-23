@@ -56,7 +56,6 @@ class Circle extends CGFobject{
 			let angle = angleInc*i;
 			let cos = Math.cos(this.deg2rad*angle);
 			let sin = Math.sin(this.deg2rad*angle);
-			debugger;
 			this.texCoords.push((cos+1)/2,(-sin+1)/2);
 		}
 

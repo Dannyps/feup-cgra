@@ -306,11 +306,24 @@ class LightingScene extends CGFscene
 
 		// Clock
 		this.pushMatrix();
-
-			this.translate(7.25,7,0);
+			this.translate(7,6.5,0);
 			this.clock.display();
 		this.popMatrix();
 
 		// ---- END Scene drawing section
+		this.setUpdatePeriod(100);
 	};
+
+
+	update(currTime)
+	{
+		if(this.oldTime==null){
+			this.oldTime=currTime;
+		}
+    	this.delta=currTime-this.oldTime;
+    	this.time = this.delta/1000;
+    	this.oldTime=currTime;
+		this.clock.update(this.time);
+	};
+
 };
