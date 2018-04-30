@@ -10,6 +10,9 @@ class MyVehicle extends CGFobject
 	{
         super(scene);
 
+        this.x=0;
+        this.y=0;
+
         this.cubo = new MyUnitCubeQuad(this.scene);
         // TODO Nao sei se e preciso repetir as faces/rodas
         this.rodafe = new MyCylinder(this.scene,30,10);
@@ -26,18 +29,18 @@ class MyVehicle extends CGFobject
 
     
 
-    setX(x){
+    incX(x){
         this.x+=x;
     };
 
-    setY(y){
+    incY(y){
         this.y+=y;
     };
 
     display()
     {
         //corpo
-        
+        this.scene.translate(this.x,this.y,0);
         this.scene.pushMatrix();
             this.scene.scale(5,2,2.5);
             this.scene.translate(0,0.5,0);
