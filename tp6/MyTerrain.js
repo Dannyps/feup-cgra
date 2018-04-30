@@ -5,9 +5,9 @@
 class MyTerrain extends Plane
 {
 
-	constructor(scene)
+	constructor(scene, ndivs)
 	{
-        super(scene, 1, 10, 0, 10);
+        super(scene, ndivs, ndivs, 0, ndivs, 0);
         
 	}
 };

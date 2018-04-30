@@ -27,7 +27,7 @@ class LightingScene extends CGFscene
 		this.speed=3;
 
 
-		this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
+		this.gl.clearColor(0.529, 0.808, 0.922, 1.0);
 		this.gl.clearDepth(100.0);
 		this.gl.enable(this.gl.DEPTH_TEST);
 		this.gl.enable(this.gl.CULL_FACE);
@@ -37,7 +37,7 @@ class LightingScene extends CGFscene
 
 		// Scene elements
 		this.carro = new MyVehicle(this);
-		this.floor = new MyTerrain(this);
+		this.floor = new MyTerrain(this, 8);
 		
 		// Materials
 		this.materialDefault = new CGFappearance(this);
@@ -239,7 +239,7 @@ class LightingScene extends CGFscene
 		this.pushMatrix();
 			//this.translate(7.5, 0, 7.5);
 			this.rotate(-90 * degToRad, 1, 0, 0);
-			this.scale(15, 15, 0.2);
+			this.scale(45, 45, 0.2);
 			this.grassAppearance.apply();
 			this.floor.display();
 		this.popMatrix();
