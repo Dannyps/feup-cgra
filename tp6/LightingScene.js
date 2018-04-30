@@ -327,13 +327,6 @@ class LightingScene extends CGFscene
 			this.plane.display();
 		this.popMatrix();
 */
-
-		//Carro
-		this.pushMatrix();
-			this.materialDefault.apply();
-			this.carro.display();
-		this.popMatrix();
-
 		// ---- END Scene drawing section
 		this.setUpdatePeriod(1000/60);
 	};
