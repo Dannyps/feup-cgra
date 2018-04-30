@@ -21,6 +21,11 @@ class LightingScene extends CGFscene
 
 		this.initLights();
 
+		this.option1=true;
+		this.option2=false;
+		this.speed=3;
+
+
 		this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
 		this.gl.clearDepth(100.0);
 		this.gl.enable(this.gl.DEPTH_TEST);
@@ -95,6 +100,10 @@ class LightingScene extends CGFscene
 
 
 		this.enableTextures(true);	
+	};
+
+	doSomething(){
+		console.log("Doing something...");
 	};
 
 	initCameras() 
