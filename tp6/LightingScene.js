@@ -331,6 +331,23 @@ class LightingScene extends CGFscene
 		this.setUpdatePeriod(1000/60);
 	};
 
+	checkKeys()
+	{
+		var text="Keys pressed: ";
+		var keysPressed=false;
+		if (this.gui.isKeyPressed("KeyW"))
+		{
+		text+=" W ";
+		keysPressed=true;
+		}
+		if (this.gui.isKeyPressed("KeyS"))
+		{
+		text+=" S ";
+		keysPressed=true;
+		}
+		if (keysPressed)
+		console.log(text);
+	}
 
 	update(currTime)
 	{
@@ -340,6 +357,7 @@ class LightingScene extends CGFscene
     	this.delta=currTime-this.oldTime;
     	this.time = this.delta/1000;
     	this.oldTime=currTime;
+    	this.checkKeys();
 		/*this.clock.update(this.time);
 		this.plane.update(this.time);*/
 	};
