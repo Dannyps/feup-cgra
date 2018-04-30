@@ -36,10 +36,17 @@ class LightingScene extends CGFscene
 		this.axis = new CGFaxis(this);
 
 		// Scene elements
-		this.floor = new MyTerrain(this, 0, 100, 1, 120);
+		this.floor = new MyTerrain(this);
 		
 		// Materials
 		this.materialDefault = new CGFappearance(this);
+
+		this.grassAppearance = new CGFappearance(this);
+		this.grassAppearance.setAmbient(0.4, 0.5, 0.05, 1);
+		this.grassAppearance.setDiffuse(0.4, 0.5, 0.05, 1);
+		this.grassAppearance.setSpecular(0,0,0,0);
+        this.grassAppearance.setShininess(120);
+        this.grassAppearance.loadTexture("../resources/images/grass.png");
 
         this.wood = new CGFappearance(this);
 		this.wood.setAmbient(139/255*0.5,70/255*0.5,8/255*0.5,1);
@@ -231,8 +238,8 @@ class LightingScene extends CGFscene
 		this.pushMatrix();
 			//this.translate(7.5, 0, 7.5);
 			this.rotate(-90 * degToRad, 1, 0, 0);
-			this.scale(150, 150, 0.2);
-			this.floorAppearance.apply();
+			this.scale(15, 15, 0.2);
+			this.grassAppearance.apply();
 			this.floor.display();
 		this.popMatrix();
 /*
