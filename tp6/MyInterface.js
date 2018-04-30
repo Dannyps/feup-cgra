@@ -46,7 +46,9 @@ class MyInterface extends CGFinterface {
 		// this.speed=3;
 		// min and max values can be specified as parameters
 
-		this.gui.add(this.scene, 'speed', -5, 5);
+        this.gui.add(this.scene, 'speed', -5, 5);
+        let sa = this.gui.add(this.scene, 'showAxis');
+        sa.setValue(true);
 
 		return true;
 	};

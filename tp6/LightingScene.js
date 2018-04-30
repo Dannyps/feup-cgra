@@ -22,7 +22,8 @@ class LightingScene extends CGFscene
 		this.initLights();
 
 		this.option1=true;
-		this.option2=false;
+		this.option2=true;
+		this.showAxis=false;
 		this.speed=3;
 
 
@@ -193,7 +194,10 @@ class LightingScene extends CGFscene
 		this.updateLights();
 
 		// Draw axis
-		this.axis.display();
+		if(this.showAxis){
+			this.axis.display();
+		}
+		
 
 		this.materialDefault.apply();
 
