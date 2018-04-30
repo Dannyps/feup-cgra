@@ -343,6 +343,8 @@ class LightingScene extends CGFscene
 		}
 		if (this.gui.isKeyPressed("KeyS"))
 		{
+			
+			this.carro.incX(-1);
 		text+=" S ";
 		keysPressed=true;
 		}
