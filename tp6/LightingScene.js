@@ -30,20 +30,8 @@ class LightingScene extends CGFscene
 		this.axis = new CGFaxis(this);
 
 		// Scene elements
-		this.table = new MyTable(this);
-		this.wall = new MyQuad(this, -2, 3, -0.5, 2.5);
-		this.floor = new MyQuad(this, 0, 10, 1, 12);
-		this.chair = new MyChair(this);
-		//this.prism = new MyPrism(this, 8, 20);
-		this.cyl = new MyCylinder(this, 20, 20, 1, 5);
-		this.clock = new MyClock(this, 12);
+		this.floor = new MyTerrain(this, 0, 100, 1, 120);
 		
-		this.boardA = new Plane(this, BOARD_A_DIVISIONS, 1.5, 0.25);
-		this.boardB = new Plane(this, BOARD_B_DIVISIONS);
-
-
-		this.plane = new MyPaperPlaneH(this, 12, 3.7, 8); //TODO: translate
-
 		// Materials
 		this.materialDefault = new CGFappearance(this);
 
@@ -228,9 +216,9 @@ class LightingScene extends CGFscene
 */
 		// Floor
 		this.pushMatrix();
-			this.translate(7.5, 0, 7.5);
+			//this.translate(7.5, 0, 7.5);
 			this.rotate(-90 * degToRad, 1, 0, 0);
-			this.scale(15, 15, 0.2);
+			this.scale(150, 150, 0.2);
 			this.floorAppearance.apply();
 			this.floor.display();
 		this.popMatrix();
@@ -331,8 +319,8 @@ class LightingScene extends CGFscene
     	this.delta=currTime-this.oldTime;
     	this.time = this.delta/1000;
     	this.oldTime=currTime;
-		this.clock.update(this.time);
-		this.plane.update(this.time);
+		/*this.clock.update(this.time);
+		this.plane.update(this.time);*/
 	};
 
 };
