@@ -55,7 +55,6 @@ class LightingScene extends CGFscene
 		this.wood.setSpecular(0,0,0,0);
 		this.wood.setShininess(120);
 		
-		
 		this.floorAppearance = new CGFappearance(this);
 		this.floorAppearance.loadTexture("../resources/images/floor.png");
 		this.floorAppearance.setAmbient(0.2,0.2,0.2,0.0);
