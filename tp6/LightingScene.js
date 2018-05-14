@@ -339,6 +339,10 @@ class LightingScene extends CGFscene
 		this.setUpdatePeriod(1000/60);
 	};
 
+	getUpdatePeriod(){
+		return this.updatePeriod;
+	}
+
 	checkKeys()
 	{
 		var text="Keys pressed: ";
@@ -359,6 +363,24 @@ class LightingScene extends CGFscene
 		if (this.gui.isKeyPressed("KeyD") && this.gui.isKeyPressed("KeyW")){
 			text+=" D ";
 			this.carro.turnRight(this.speed);
+			keysPressed=true;
+		}
+
+		if (this.gui.isKeyPressed("KeyA") && this.gui.isKeyPressed("KeyW")){
+			text+=" D ";
+			this.carro.turnRight(-this.speed);
+			keysPressed=true;
+		}
+
+		if (this.gui.isKeyPressed("KeyA") && this.gui.isKeyPressed("KeyS")){
+			text+=" D ";
+			this.carro.turnRight(this.speed);
+			keysPressed=true;
+		}
+
+		if (this.gui.isKeyPressed("KeyD") && this.gui.isKeyPressed("KeyS")){
+			text+=" D ";
+			this.carro.turnRight(-this.speed);
 			keysPressed=true;
 		}
 
