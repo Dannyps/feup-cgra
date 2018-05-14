@@ -11,7 +11,7 @@ class MyVehicle extends CGFobject
         super(scene);
 
         this.x=0;
-        this.y=0;
+        this.z=0;
         this.dir=0;
 
         this.cubo = new MyUnitCubeQuad(this.scene);
@@ -29,64 +29,71 @@ class MyVehicle extends CGFobject
     };
 
     turnRight(c){
-        this.dir+=c;
+        this.dir-=c*0.1;
     };
 
     turnLeft(c){
-        this.dir-=c;
+        this.dir+=c*0.1;
     };
 
-    move(x){
-        this.x=+Math.cos(this.dir);
-        this.y=+Math.sin(this.dir);
+    move(speed){
+        this.x+=speed*Math.cos(this.dir);
+        this.z-=speed*Math.sin(this.dir);
     };
 
     display()
     {
+        console.log(this.x, this.z, this.dir);
         //corpo
-        this.scene.translate(this.x,this.y,0);
-        this.scene.rotate(this.dir, 0,1,0);
-        this.scene.pushMatrix();
-            this.scene.scale(5,2,2.5);
-            this.scene.translate(0,0.5,0);
-            this.cubo.display();
-        this.scene.popMatrix();
+      this.scene.pushMatrix();
 
-        //rodas
-        this.scene.pushMatrix();
-            this.scene.translate(0,1,0);
-
-            //rodafe
-            this.scene.pushMatrix();
-                this.scene.translate(2.5,0,-1.25);
-                this.rodafe.display();
-                this.scene.translate(0,0,-0.5);
-                this.scene.rotate(Math.PI,1,0,0);
-                this.facefe.display();
-            this.scene.popMatrix();
+      this.scene.translate(this.x,0,this.z);
+      this.scene.rotate(this.dir, 0,1,0);
+        
 
             this.scene.pushMatrix();
-                this.scene.translate(2.5,0,1.25);
-                this.rodafd.display();
-                this.scene.translate(0,0,0.5);
-                this.facefd.display();
+                this.scene.scale(5,2,2.5);
+                this.scene.translate(0,0.5,0);
+                this.cubo.display();
             this.scene.popMatrix();
 
+            //rodas
             this.scene.pushMatrix();
-                this.scene.translate(-2.5,0,-1.25);
-                this.rodate.display();
-                this.scene.translate(0,0,-0.5);
-                this.scene.rotate(Math.PI,1,0,0);
-                this.facete.display();
-            this.scene.popMatrix();
+                this.scene.translate(0,1,0);
 
-            this.scene.pushMatrix();
-                this.scene.translate(-2.5,0,1.25);
-                this.rodatd.display();
-                this.scene.translate(0,0,0.5);
-                this.facetd.display();
-            this.scene.popMatrix();
+                //rodafe
+                this.scene.pushMatrix();
+                    this.scene.translate(2.5,0,-1.25);
+                    this.rodafe.display();
+                    this.scene.translate(0,0,-0.5);
+                    this.scene.rotate(Math.PI,1,0,0);
+                    this.facefe.display();
+                this.scene.popMatrix();
 
+                this.scene.pushMatrix();
+                    this.scene.translate(2.5,0,1.25);
+                    this.rodafd.display();
+                    this.scene.translate(0,0,0.5);
+                    this.facefd.display();
+                this.scene.popMatrix();
+
+                this.scene.pushMatrix();
+                    this.scene.translate(-2.5,0,-1.25);
+                    this.rodate.display();
+                    this.scene.translate(0,0,-0.5);
+                    this.scene.rotate(Math.PI,1,0,0);
+                    this.facete.display();
+                this.scene.popMatrix();
+
+                this.scene.pushMatrix();
+                    this.scene.translate(-2.5,0,1.25);
+                    this.rodatd.display();
+                    this.scene.translate(0,0,0.5);
+                    this.facetd.display();
+                this.scene.popMatrix();
+
+
+            this.scene.popMatrix();
 
         this.scene.popMatrix();
 

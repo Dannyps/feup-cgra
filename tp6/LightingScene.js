@@ -209,6 +209,14 @@ class LightingScene extends CGFscene
 
 		this.materialDefault.apply();
 
+		 
+		//Carro 
+		this.pushMatrix(); 
+		this.materialDefault.apply(); 
+			this.carro.display(); 
+		this.popMatrix(); 
+ 
+
 		// ---- END Background, camera and axis setup
 
 		// ---- BEGIN Scene drawing section
@@ -354,11 +362,11 @@ class LightingScene extends CGFscene
 			keysPressed=true;
 		}
 
-		if (this.gui.isKeyPressed("KeyA")){
+		/*if (this.gui.isKeyPressed("KeyA")){
 			text+=" A ";
 			this.carro.turnLeft();
 			keysPressed=true;
-		}
+		}*/
 
 		if (keysPressed)
 		console.log(text);
