@@ -12,6 +12,7 @@ class MyVehicle extends CGFobject
 
         this.x=0;
         this.y=0;
+        this.dir=0;
 
         this.cubo = new MyUnitCubeQuad(this.scene);
         // TODO Nao sei se e preciso repetir as faces/rodas
@@ -27,20 +28,24 @@ class MyVehicle extends CGFobject
 
     };
 
-    
-
-    incX(x){
-        this.x+=x;
+    turnRight(c){
+        this.dir+=c;
     };
 
-    incY(y){
-        this.y+=y;
+    turnLeft(c){
+        this.dir-=c;
+    };
+
+    move(x){
+        this.x=+Math.cos(this.dir);
+        this.y=+Math.sin(this.dir);
     };
 
     display()
     {
         //corpo
         this.scene.translate(this.x,this.y,0);
+        this.scene.rotate(this.dir, 0,1,0);
         this.scene.pushMatrix();
             this.scene.scale(5,2,2.5);
             this.scene.translate(0,0.5,0);
