@@ -54,7 +54,7 @@ class LightingScene extends CGFscene
 		this.wood.setDiffuse(139/255,70/255,8/255,1);
 		this.wood.setSpecular(0,0,0,0);
 		this.wood.setShininess(120);
-		
+ 		
 		this.floorAppearance = new CGFappearance(this);
 		this.floorAppearance.loadTexture("../resources/images/floor.png");
 		this.floorAppearance.setAmbient(0.2,0.2,0.2,0.0);
@@ -327,13 +327,6 @@ class LightingScene extends CGFscene
 			this.plane.display();
 		this.popMatrix();
 */
-
-		//Carro
-		this.pushMatrix();
-			this.materialDefault.apply();
-			this.carro.display();
-		this.popMatrix();
-
 		// ---- END Scene drawing section
 		this.setUpdatePeriod(1000/60);
 	};
