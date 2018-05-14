@@ -6,14 +6,14 @@ var BOARD_HEIGHT = 4.0;
 var BOARD_A_DIVISIONS = 30;
 var BOARD_B_DIVISIONS = 100;
 
-class LightingScene extends CGFscene 
+class LightingScene extends CGFscene
 {
 	constructor()
 	{
 		super();
 	};
 
-	init(application) 
+	init(application)
 	{
 		super.init(application);
 
@@ -50,7 +50,7 @@ class LightingScene extends CGFscene
 						];
 
 		this.floor = new MyTerrain(this, 8, altimetry);
-		
+
 		// Materials
 		this.materialDefault = new CGFappearance(this);
 
@@ -66,7 +66,7 @@ class LightingScene extends CGFscene
 		this.wood.setDiffuse(139/255,70/255,8/255,1);
 		this.wood.setSpecular(0,0,0,0);
 		this.wood.setShininess(120);
- 		
+
 		this.floorAppearance = new CGFappearance(this);
 		this.floorAppearance.loadTexture("../resources/images/floor.png");
 		this.floorAppearance.setAmbient(0.2,0.2,0.2,0.0);
@@ -90,8 +90,8 @@ class LightingScene extends CGFscene
 		this.windowAppearance.setSpecular(0,0,0,1);
 		this.windowAppearance.setShininess(120);
 		this.windowAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
-				
-		
+
+
 		this.materialA = new CGFappearance(this);
 		this.materialA.setAmbient(0.3,0.3,0.3,1);
 		this.materialA.setDiffuse(0.6,0.6,0.6,1);
@@ -101,7 +101,7 @@ class LightingScene extends CGFscene
 		this.materialB = new CGFappearance(this);
 		this.materialB.setAmbient(0.3,0.3,0.3,1);
 		this.materialB.setDiffuse(0.6,0.6,0.6,1);
-		this.materialB.setSpecular(0.8,0.8,0.8,1);	
+		this.materialB.setSpecular(0.8,0.8,0.8,1);
 		this.materialB.setShininess(120);
 
 		this.slideAppearance = new CGFappearance(this);
@@ -120,26 +120,26 @@ class LightingScene extends CGFscene
 		this.boardAppearance.setShininess(1);
 
 
-		this.enableTextures(true);	
+		this.enableTextures(true);
 	};
 
 	doSomething(){
 		console.log("Doing something...");
 	};
 
-	initCameras() 
+	initCameras()
 	{
 		this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(30, 30, 30), vec3.fromValues(0, 0, 0));
 	};
 
-	initLights() 
+	initLights()
 	{
 		//this.setGlobalAmbientLight(0.5,0.5,0.5, 1.0);
-		
+
 		// Positions for four lights
 		this.lights[0].setPosition(4, 6, 1, 1);
 		this.lights[0].setVisible(true); // show marker on light position (different from enabled)
-		
+
 		this.lights[1].setPosition(10.5, 6.0, 1.0, 1.0);
 		this.lights[1].setVisible(true); // show marker on light position (different from enabled)
 
@@ -188,14 +188,14 @@ class LightingScene extends CGFscene
 		this.lights[4].enable();
 	};
 
-	updateLights() 
+	updateLights()
 	{
 		for (var i = 0; i < this.lights.length; i++)
 			this.lights[i].update();
 	}
 
 
-	display() 
+	display()
 	{
 		// ---- BEGIN Background, camera and axis setup
 
@@ -217,17 +217,17 @@ class LightingScene extends CGFscene
 		if(this.showAxis){
 			this.axis.display();
 		}
-		
+
 
 		this.materialDefault.apply();
 
-		 
-		//Carro 
-		this.pushMatrix(); 
-		this.materialDefault.apply(); 
-			this.carro.display(); 
-		this.popMatrix(); 
- 
+
+		//Carro
+		this.pushMatrix();
+		this.materialDefault.apply();
+			this.carro.display();
+		this.popMatrix();
+
 
 		// ---- END Background, camera and axis setup
 
@@ -240,7 +240,7 @@ class LightingScene extends CGFscene
 			this.translate(1.2,2,10);
 			this.rotate(Math.PI*1/4,1,0,0);
 			this.scale(1,1,5);
-			
+
 			this.prism.display();
 		this.popMatrix();
 */
@@ -321,7 +321,7 @@ class LightingScene extends CGFscene
 			this.rotate(degToRad*180, 0, 1, 0);
 			this.chair.display();
 		this.popMatrix();
-		
+
 		// Chair 3
 		this.pushMatrix();
 			this.translate(12,0,9.5);
@@ -334,7 +334,7 @@ class LightingScene extends CGFscene
 			this.rotate(degToRad*180, 0, 1, 0);
 			this.chair.display();
 		this.popMatrix();
-	
+
 
 		// Clock
 		this.pushMatrix();
