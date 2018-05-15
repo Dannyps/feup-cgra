@@ -361,40 +361,60 @@ class LightingScene extends CGFscene
 		var keysPressed=false;
 
 		if (this.gui.isKeyPressed("KeyW")){
-			this.carro.move(1*this.speed);
+			this.carro.incSpeed(0.1);
 			text+=" W ";
 			keysPressed=true;
 		}
 
 		if (this.gui.isKeyPressed("KeyS")){
+			this.carro.incSpeed(-0.1);
 			text+=" S ";
-			this.carro.move(-1*this.speed);
 			keysPressed=true;
 		}
 
-		if (this.gui.isKeyPressed("KeyD") && this.gui.isKeyPressed("KeyW")){
+		if (this.gui.isKeyPressed("KeyD")){
 			text+=" D ";
 			this.carro.turnRight(this.speed);
 			keysPressed=true;
 		}
 
-		if (this.gui.isKeyPressed("KeyA") && this.gui.isKeyPressed("KeyW")){
+		if (this.gui.isKeyPressed("KeyA")){
+				text+=" A ";
+				this.carro.turnLeft(this.speed);
+				keysPressed=true;
+		}
+
+		//		TRAVAO?
+		
+		//if (this.gui.isKeyPressed("space")){
+		//	this.carro.incSpeed(-0.08);
+		//	keysPressed=true;
+		//}
+
+		/*
+		if (this.gui.isKeyPressed("KeyD") && this.gui.isKeyPressed("KeyW")){
 			text+=" D ";
-			this.carro.turnRight(-this.speed);
+			//this.carro.turnRight(this.speed);
+			keysPressed=true;
+		}
+
+		if (this.gui.isKeyPressed("KeyA") && this.gui.isKeyPressed("KeyW")){
+			text+=" A ";
+			//this.carro.turnRight(-this.speed);
 			keysPressed=true;
 		}
 
 		if (this.gui.isKeyPressed("KeyA") && this.gui.isKeyPressed("KeyS")){
 			text+=" D ";
-			this.carro.turnRight(this.speed);
+			//this.carro.turnRight(this.speed);
 			keysPressed=true;
 		}
 
 		if (this.gui.isKeyPressed("KeyD") && this.gui.isKeyPressed("KeyS")){
 			text+=" D ";
-			this.carro.turnRight(-this.speed);
+			//this.carro.turnRight(-this.speed);
 			keysPressed=true;
-		}
+		}*/
 
 		/*if (this.gui.isKeyPressed("KeyA")){
 			text+=" A ";
@@ -415,8 +435,9 @@ class LightingScene extends CGFscene
     	this.time = this.delta/1000;
     	this.oldTime=currTime;
     	this.checkKeys();
-		/*this.clock.update(this.time);
-		this.plane.update(this.time);*/
+		//this.clock.update(this.time);
+		//this.plane.update(this.time);
+		this.carro.update(this.time);
 	};
 
 };

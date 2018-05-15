@@ -13,9 +13,9 @@ class MyVehicle extends CGFobject {
         this.dir = 0;
         this.rdir = 0;
         this.mc = 0.3; // magic const
+        this.carspeed=0;
 
         this.cubo = new MyUnitCubeQuad(this.scene);
-        // TODO Nao sei se e preciso repetir as faces/rodas
         this.rodafe = new MyCylinder(this.scene, 30, 10);
         this.facefe = new Circle(this.scene, 30);
         this.rodafd = new MyCylinder(this.scene, 30, 10);
@@ -34,12 +34,20 @@ class MyVehicle extends CGFobject {
 
     };
 
+    incSpeed(aceleration){
+      this.carspeed += aceleration;   //positiva ou negativa
+    };
+
     turnRight(c) {
+      if(this.carspeed!=0){
         this.dir -= c * this.mc * 0.1;
+      }
     };
 
     turnLeft(c) {
-        this.dir += c * this.mc* 0.1;
+      if(this.carspeed!=0){
+        this.dir += c * this.mc * 0.1;
+      }
     };
 
     move(speed) {
@@ -146,6 +154,21 @@ class MyVehicle extends CGFobject {
     };
 
 
-    update(time) {}
+    update(time)
+    {
+      this.move(this.carspeed);
+
+      //    atrito
+      if(this.carspeed > 0){
+      this.incSpeed(-0.05);
+      if(this.carspeed<0)
+      this.carspeed=0;
+      }
+      else if (this.carspeed < 0){
+      this.incSpeed(0.05);
+      if(this.carspeed>0)
+      this.carspeed=0;
+      }
+    }
 
 };
