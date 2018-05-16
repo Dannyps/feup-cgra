@@ -379,8 +379,15 @@ class LightingScene extends CGFscene
 		}
 
 		if (this.gui.isKeyPressed("KeyA")){
-				text+=" A ";
-				this.carro.turnLeft(this.speed);
+			text+=" A ";
+			this.carro.turnLeft(this.speed);
+			keysPressed=true;
+		}
+
+		if (this.gui.isKeyPressed("KeyC")&&this.carro.cameratimer>30){
+				text+=" C ";
+				this.carro.cameratimer=0;
+				this.carro.changeCamera();
 				keysPressed=true;
 		}
 
@@ -437,7 +444,12 @@ class LightingScene extends CGFscene
     	this.checkKeys();
 		//this.clock.update(this.time);
 		//this.plane.update(this.time);
+
+		//console.log("car:" +this.carro.x+ " " +this.carro.z);
+		//console.log(this.carro.camerax+ " " +this.carro.cameray+ " " +this.carro.cameraz);
 		this.carro.update(this.time);
+		this.camera.setTarget(vec3.fromValues(this.carro.cameratx,1, this.carro.cameratz));
+		this.camera.setPosition(vec3.fromValues(this.carro.camerax,this.carro.cameray,this.carro.cameraz));
 	};
 
 };

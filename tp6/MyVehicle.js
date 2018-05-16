@@ -15,6 +15,14 @@ class MyVehicle extends CGFobject {
         this.mc = 0.3; // magic const
         this.carspeed=0;
 
+        this.currentCamera=0;
+        this.cameratx=0;
+        this.cameratz=0;
+        this.camerax=0;
+        this.cameraz=0;
+        this.cameray=0;
+        this.cameratimer=0;
+
         this.cubo = new MyUnitCubeQuad(this.scene);
         this.rodafe = new MyCylinder(this.scene, 30, 10);
         this.facefe = new Circle(this.scene, 30);
@@ -36,6 +44,42 @@ class MyVehicle extends CGFobject {
 
     incSpeed(aceleration){
       this.carspeed += aceleration;   //positiva ou negativa
+    };
+
+    changeCamera(){
+        if(this.currentCamera==0)
+        this.currentCamera=1;
+        else if(this.currentCamera==1)
+        this.currentCamera=2;
+        else if(this.currentCamera==2)
+        this.currentCamera=0;
+    };
+
+    updatecamera0(){
+        console.log("camera1");
+        this.cameratx=this.x+15*Math.cos(this.dir);
+        this.cameratz=(this.z-15*Math.sin(this.dir));
+        this.camerax=this.x+6*Math.cos(this.dir+Math.PI);
+        this.cameraz=(this.z-6*Math.sin(this.dir+Math.PI));
+        this.cameray=4;
+    };
+
+    updatecamera1(){
+        console.log("camera2");
+        this.cameratx=this.x+15*Math.cos(this.dir);
+        this.cameratz=(this.z-15*Math.sin(this.dir));
+        this.camerax=this.x+20*Math.cos(this.dir+Math.PI);
+        this.cameraz=(this.z-20*Math.sin(this.dir+Math.PI));
+        this.cameray=6;
+    };
+
+    updatecamera2(){
+        this.camerax=30;
+        this.cameraz=30;
+        this.cameray=30; console.log(this.camerax+ " " +this.cameray+ " " +this.cameraz);
+        this.cameratx=this.x+2*Math.cos(this.dir);
+        this.cameratz=(this.z-2*Math.sin(this.dir));
+
     };
 
     turnRight(c) {
@@ -156,6 +200,7 @@ class MyVehicle extends CGFobject {
 
     update(time)
     {
+        this.cameratimer++;
       this.move(this.carspeed);
 
       //    atrito
@@ -168,6 +213,15 @@ class MyVehicle extends CGFobject {
       this.incSpeed(0.05);
       if(this.carspeed>0)
       this.carspeed=0;
+      }
+      if(this.currentCamera==0){
+      this.updatecamera0();
+      }
+      else if(this.currentCamera==1){
+      this.updatecamera1();
+      }
+      else if(this.currentCamera==2){
+      this.updatecamera2();
       }
     }
 
