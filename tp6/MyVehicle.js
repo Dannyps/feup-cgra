@@ -34,11 +34,18 @@ class MyVehicle extends CGFobject {
         this.facetd = new Circle(this.scene, 30);
 
         this.tyreText = new CGFappearance(this.scene);
-    this.tyreText.loadTexture("../resources/images/tyre.png");
-    this.tyreText.setAmbient(0.2,0.2,0.2,0.0);
-    this.tyreText.setDiffuse(0.2, 0.2, 0.2, 1);
-    this.tyreText.setSpecular(0.5, 0.5, 0.5,1);
-    this.tyreText.setShininess(1);
+        this.tyreText.loadTexture("../resources/images/tyre.png");
+        this.tyreText.setAmbient(0.2,0.2,0.2,0.0);
+        this.tyreText.setDiffuse(0.2, 0.2, 0.2, 1);
+        this.tyreText.setSpecular(0.6, 0.6, 0.6, 1);
+        this.tyreText.setShininess(1);
+
+        this.tyre2Text = new CGFappearance(this.scene);
+        this.tyre2Text.loadTexture("../resources/images/tyre2.png");
+        this.tyre2Text.setAmbient(0.2,0.2,0.2,0.0);
+        this.tyre2Text.setDiffuse(0.3, 0.3, 0.3, 1);
+        this.tyre2Text.setSpecular(0,0,0, 1);
+        this.tyre2Text.setShininess(1);
 
     };
 
@@ -139,6 +146,7 @@ class MyVehicle extends CGFobject {
                     this.scene.translate(0, 1, 0);
                     this.scene.translate(2.5, 0, -1.25);
                         this.scene.rotate(this.rdir, 0, 0, 1);
+                        this.tyre2Text.apply();
                     this.rodafe.display();
                     this.scene.translate(0, 0, -0.5);
                     this.scene.rotate(Math.PI, 1, 0, 0);
@@ -154,6 +162,7 @@ class MyVehicle extends CGFobject {
                     this.scene.translate(0, 1, 0);
                     this.scene.translate(2.5, 0, 1.25);
                         this.scene.rotate(this.rdir, 0, 0, 1);
+                        this.tyre2Text.apply();
                     this.rodafd.display();
                     this.scene.translate(0, 0, 0.5);
                     this.tyreText.apply();
@@ -168,6 +177,7 @@ class MyVehicle extends CGFobject {
                     this.scene.translate(0, 1, 0);
                     this.scene.translate(-2.5, 0, -1.25);
                         this.scene.rotate(this.rdir, 0, 0, 1);
+                        this.tyre2Text.apply();
                     this.rodate.display();
                     this.scene.translate(0, 0, -0.5);
                     this.scene.rotate(Math.PI, 1, 0, 0);
@@ -181,6 +191,7 @@ class MyVehicle extends CGFobject {
                     this.scene.translate(0, 1, 0);
                     this.scene.translate(-2.5, 0, 1.25);
                         this.scene.rotate(this.rdir, 0, 0, 1);
+                        this.tyre2Text.apply();
                     this.rodatd.display();
                     this.scene.translate(0, 0, 0.5);
                     this.tyreText.apply();
