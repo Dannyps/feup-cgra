@@ -63,7 +63,6 @@ class MyVehicle extends CGFobject {
     };
 
     updatecamera0(){
-        console.log("camera1");
         this.cameratx=this.x+15*Math.cos(this.dir);
         this.cameratz=(this.z-15*Math.sin(this.dir));
         this.camerax=this.x+6*Math.cos(this.dir+Math.PI);
@@ -72,7 +71,6 @@ class MyVehicle extends CGFobject {
     };
 
     updatecamera1(){
-        console.log("camera2");
         this.cameratx=this.x+15*Math.cos(this.dir);
         this.cameratz=(this.z-15*Math.sin(this.dir));
         this.camerax=this.x+20*Math.cos(this.dir+Math.PI);

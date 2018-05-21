@@ -22,9 +22,12 @@ class LightingScene extends CGFscene
 		this.initLights();
 
 		this.specialCamera=true;
+		this.option1=true;
 		this.option2=true;
 		this.showAxis=false;
 		this.speed=3;
+		this.keysblocked=false;
+		this.cranetimer=0;
 
 
 		this.gl.clearColor(0.529, 0.808, 0.922, 1.0);
@@ -37,6 +40,7 @@ class LightingScene extends CGFscene
 
 		// Scene elements
 		this.carro = new MyVehicle(this);
+		this.crane = new MyCrane(this);
 
 		let altimetry =[[ 2.0 , 3.0 , 2.0, 4.0, 2.5, 2.4, 2.3, 1.3 ],
 						[ 2.0 , 3.0 , 2.0, 4.0, 7.5, 6.4, 4.3, 1.3 ],
@@ -223,10 +227,21 @@ class LightingScene extends CGFscene
 
 
 		//Carro
+
+		if(!this.crane.carlocked){
 		this.pushMatrix();
-		this.materialDefault.apply();
+			this.materialDefault.apply();
 			this.carro.display();
 		this.popMatrix();
+		}
+
+		//Crane
+		
+		this.pushMatrix();
+			this.materialDefault.apply();
+			this.crane.display();
+		this.popMatrix();
+		
 
 
 		// ---- END Background, camera and axis setup
@@ -347,6 +362,7 @@ class LightingScene extends CGFscene
 			this.plane.display();
 		this.popMatrix();
 */
+
 		// ---- END Scene drawing section
 		this.setUpdatePeriod(1000/60);
 	};
@@ -360,6 +376,9 @@ class LightingScene extends CGFscene
 		var text="Keys pressed: ";
 		var keysPressed=false;
 
+		//	CARRO KEYS
+		
+		if(!this.keysblocked){
 		if (this.gui.isKeyPressed("KeyW")){
 			this.carro.incSpeed(0.1);
 			text+=" W ";
@@ -383,6 +402,7 @@ class LightingScene extends CGFscene
 			this.carro.turnLeft(this.speed);
 			keysPressed=true;
 		}
+		}
 
 		if (this.gui.isKeyPressed("KeyC")&&this.carro.cameratimer>30){
 				text+=" C ";
@@ -390,6 +410,70 @@ class LightingScene extends CGFscene
 				this.carro.changeCamera();
 				keysPressed=true;
 		}
+		
+
+		//		CRANE KEYS	(NAO E NECESSARIO)
+		/*
+		if (this.gui.isKeyPressed("ArrowUp")){
+			this.crane.incBraco1rot(-0.02);
+			text+=" W ";
+			keysPressed=true;
+		}
+
+		if (this.gui.isKeyPressed("ArrowDown")){
+			this.crane.incBraco1rot(0.02);
+			text+=" S ";
+			keysPressed=true;
+		}
+
+		if (this.gui.isKeyPressed("KeyW")){
+			text+=" W ";
+			this.crane.incBraco2rot(0.01);
+			keysPressed=true;
+		}
+
+		if (this.gui.isKeyPressed("KeyS")){
+			text+=" S ";
+			this.crane.incBraco2rot(-0.01);
+			keysPressed=true;
+		}
+
+		if (this.gui.isKeyPressed("KeyE")){
+			text+=" E ";
+			this.crane.incRoty(0.02);
+			keysPressed=true;
+		}
+
+		if (this.gui.isKeyPressed("KeyQ")){
+			text+=" Q ";
+			this.crane.incRoty(-0.02);
+			keysPressed=true;
+		}
+
+		if (this.gui.isKeyPressed("KeyR")){
+			text+=" R ";
+			this.crane.incBraco1length(0.05);
+			keysPressed=true;
+		}
+
+		if (this.gui.isKeyPressed("KeyF")){
+			text+=" F ";
+			this.crane.incBraco1length(-0.05);
+			keysPressed=true;
+		}
+
+		if (this.gui.isKeyPressed("KeyC")){
+			text+=" C ";
+			this.crane.incBraco2length(0.05);
+			keysPressed=true;
+		}
+
+		if (this.gui.isKeyPressed("KeyZ")){
+			text+=" Z ";
+			this.crane.incBraco2length(-0.05);
+			keysPressed=true;
+		}
+		*/
 
 		//		TRAVAO?
 		
@@ -435,6 +519,11 @@ class LightingScene extends CGFscene
 
 	update(currTime)
 	{
+		this.cranetimer++;
+		if(this.carro.x<1 && this.carro.x>-2 && this.carro.z>-21 && this.carro.z<-18 && this.carro.carspeed<0.5 && this.keysblocked!=true){	//speed < 1
+			this.cranetimer=0;
+			this.keysblocked=true;
+		}
 		if(this.oldTime==null){
 			this.oldTime=currTime;
 		}
@@ -442,15 +531,12 @@ class LightingScene extends CGFscene
     	this.time = this.delta/1000;
     	this.oldTime=currTime;
     	this.checkKeys();
+
 		//this.clock.update(this.time);
 		//this.plane.update(this.time);
-
-		//console.log("car:" +this.carro.x+ " " +this.carro.z);
-		//console.log(this.carro.camerax+ " " +this.carro.cameray+ " " +this.carro.cameraz);
 		this.carro.update(this.time);
-		if(this.specialCamera){
-			this.camera.setTarget(vec3.fromValues(this.carro.cameratx,1, this.carro.cameratz));
-			this.camera.setPosition(vec3.fromValues(this.carro.camerax,this.carro.cameray,this.carro.cameraz));
-		}
+		this.crane.update(this.cranetimer,this.carro.x,this.carro.z,this.carro.carspeed);
+		//this.camera.setTarget(vec3.fromValues(this.carro.cameratx,1, this.carro.cameratz));
+		//this.camera.setPosition(vec3.fromValues(this.carro.camerax,this.carro.cameray,this.carro.cameraz));
 	};
 };
