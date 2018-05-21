@@ -33,12 +33,12 @@ class MyVehicle extends CGFobject {
         this.rodatd = new MyCylinder(this.scene, 30, 10);
         this.facetd = new Circle(this.scene, 30);
 
-        this.clockText = new CGFappearance(this.scene);
-    this.clockText.loadTexture("../resources/images/clock.png");
-    this.clockText.setAmbient(0.2,0.2,0.2,0.0);
-    this.clockText.setDiffuse(0.2, 0.2, 0.2, 1);
-    this.clockText.setSpecular(0.5, 0.5, 0.5,1);
-    this.clockText.setShininess(1);
+        this.tyreText = new CGFappearance(this.scene);
+    this.tyreText.loadTexture("../resources/images/tyre.png");
+    this.tyreText.setAmbient(0.2,0.2,0.2,0.0);
+    this.tyreText.setDiffuse(0.2, 0.2, 0.2, 1);
+    this.tyreText.setSpecular(0.5, 0.5, 0.5,1);
+    this.tyreText.setShininess(1);
 
     };
 
@@ -142,7 +142,7 @@ class MyVehicle extends CGFobject {
                     this.rodafe.display();
                     this.scene.translate(0, 0, -0.5);
                     this.scene.rotate(Math.PI, 1, 0, 0);
-                    this.clockText.apply();
+                    this.tyreText.apply();
                     this.facefe.display();
                     this.scene.materialDefault.apply();
 
@@ -156,7 +156,7 @@ class MyVehicle extends CGFobject {
                         this.scene.rotate(this.rdir, 0, 0, 1);
                     this.rodafd.display();
                     this.scene.translate(0, 0, 0.5);
-                    this.clockText.apply();
+                    this.tyreText.apply();
                     this.facefd.display();
                     this.scene.materialDefault.apply();
 
@@ -171,7 +171,7 @@ class MyVehicle extends CGFobject {
                     this.rodate.display();
                     this.scene.translate(0, 0, -0.5);
                     this.scene.rotate(Math.PI, 1, 0, 0);
-                    this.clockText.apply();
+                    this.tyreText.apply();
                     this.facete.display();
                     this.scene.materialDefault.apply();
                 }
@@ -183,7 +183,7 @@ class MyVehicle extends CGFobject {
                         this.scene.rotate(this.rdir, 0, 0, 1);
                     this.rodatd.display();
                     this.scene.translate(0, 0, 0.5);
-                    this.clockText.apply();
+                    this.tyreText.apply();
                     this.facetd.display();
                     this.scene.materialDefault.apply();
                 }
