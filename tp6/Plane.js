@@ -14,9 +14,93 @@ class Plane extends CGFobject {
 		this.ya = ya;
 		this.altimetry = altimetry;
 
+		this.factorY=7;
+
 		this.initBuffers();
 
 	};
+
+	getVertex(i, j){
+		let c = (j*(this.nrDivs+1)+(i))*3;
+		/*if(j!=0){
+			c+=(3*(j-1));
+		}*/
+		return [this.vertices[c], this.vertices[c+1], this.vertices[c+2]/this.factorY];
+	}
+
+	/**
+	 * 
+	 * @param {*} e1 
+	 * @param {*} e2 
+	 * 
+	 * @return a vector normal to the plane
+	 */
+	getPlaneByEdges (e1, e2){
+		return this.crossProduct(e1, e2);
+	}
+
+	crossProduct(a, b) {
+		console.log("a:"+a);
+		console.log("b:"+b);
+
+		// Check lengths
+		if (a.length != 3 || b.length != 3) {
+			return;
+		}
+
+		let res =  [a[1]*b[2] - a[2]*b[1],
+				a[2]*b[0] - a[0]*b[2],
+				a[0]*b[1] - a[1]*b[0]];
+
+		console.log(res);
+
+		return res;
+	}
+
+	vopp(p1, p2){
+		return [p2[0]-p1[0], p2[1]-p1[1], p2[2]-p1[2]];
+	}
+
+
+	/**
+	 * 
+	 * @param {*} s selfVertex 
+	 * @param {*} vl VertexLeft 
+	 * @param {*} vr VertexRight
+	 * @param {*} vt VertexTop
+	 * @param {*} vb VertexBottom
+	 */
+	newell(s, vl, vr, vt, vb){
+		/*
+					y
+					^
+		 P2 		|		P1
+		    	    vt        
+					|
+		 	 	 	|        
+		--vl--------s---------vr---> x
+		    	    |      
+					|
+		 P3  		vb   	P4
+					|       
+
+		*/
+
+		let p1, p2, p3, p4;
+
+		p1 = this.getPlaneByEdges(this.vopp(s, vr), this.vopp(s, vt));
+		p2 = this.getPlaneByEdges(this.vopp(s, vt), this.vopp(s, vl));
+		p3 = this.getPlaneByEdges(this.vopp(s, vl), this.vopp(s, vb));
+		p4 = this.getPlaneByEdges(this.vopp(s, vb), this.vopp(s, vr));
+
+		let normalFinal = [
+			p1[0] + p2[0] + p3[0] + p4[0],
+			p1[1] + p2[1] + p3[1] + p4[1],
+			p1[2] + p2[2] + p3[2] + p4[2],
+		];
+
+		return normalFinal;
+	}
 
 	initBuffers() {
 		/* example for nrDivs = 3 :
@@ -47,12 +131,7 @@ class Plane extends CGFobject {
 		for (var j = 0; j <= this.nrDivs; j++) {
 			var xCoord = -0.5;
 			for (var i = 0; i <= this.nrDivs; i++) {
-				this.vertices.push(xCoord, yCoord, this.altimetry[i][j]*5);
-
-				// As this plane is being drawn on the xy plane, the normal to the plane will be along the positive z axis.
-				// So all the vertices will have the same normal, (0, 0, 1).
-
-				this.normals.push(0, 0, 1);
+				this.vertices.push(xCoord, yCoord, this.altimetry[i][j]*this.factorY);
 
 				// texCoords should be computed here; uncomment and fill the blanks
 				this.texCoords.push(this.x / this.nrDivs * i - this.xa, this.y / this.nrDivs * j - this.ya);
@@ -61,6 +140,29 @@ class Plane extends CGFobject {
 			}
 			yCoord -= this.patchLength;
 		}
+		console.log(this.vertices);
+		for (var j = 0; j <= this.nrDivs; j++) {
+			var xCoord = -0.5;
+			for (var i = 0; i <= this.nrDivs; i++) {
+				if(i>0 && j > 0 && i < this.nrDivs && j < this.nrDivs){
+					//common case
+					console.log(i, j);
+					let self = this.getVertex(i, j);
+					let vt = this.getVertex(i-1, j); // vertex left
+					let vb = this.getVertex(i+1, j); // vertex right
+					let vl = this.getVertex(i, j-1); // vertex top
+					let vr = this.getVertex(i, j+1); // vertex bottom
+					let normal = this.newell(self, vl, vr, vt, vb);
+					this.normals.push(normal[0]*10, normal[1]*10, normal[2]*10);
+				}
+				else
+					this.normals.push(0,0,1);
+
+				xCoord += this.patchLength;
+			}
+			yCoord -= this.patchLength;
+		}
+		console.log(this.normals);
 
 		// Generating indices
 		/* for nrDivs = 3 output will be 
