@@ -21,7 +21,7 @@ class LightingScene extends CGFscene
 
 		this.initLights();
 
-		this.option1=true;
+		this.specialCamera=true;
 		this.option2=true;
 		this.showAxis=false;
 		this.speed=3;
@@ -448,8 +448,9 @@ class LightingScene extends CGFscene
 		//console.log("car:" +this.carro.x+ " " +this.carro.z);
 		//console.log(this.carro.camerax+ " " +this.carro.cameray+ " " +this.carro.cameraz);
 		this.carro.update(this.time);
-		this.camera.setTarget(vec3.fromValues(this.carro.cameratx,1, this.carro.cameratz));
-		this.camera.setPosition(vec3.fromValues(this.carro.camerax,this.carro.cameray,this.carro.cameraz));
+		if(this.specialCamera){
+			this.camera.setTarget(vec3.fromValues(this.carro.cameratx,1, this.carro.cameratz));
+			this.camera.setPosition(vec3.fromValues(this.carro.camerax,this.carro.cameray,this.carro.cameraz));
+		}
 	};
-
 };

@@ -38,7 +38,7 @@ class MyInterface extends CGFinterface {
 		// add two check boxes to the group. The identifiers must be members variables of the scene initialized in scene.init as boolean
 		// e.g. this.option1=true; this.option2=false;
 
-		group.add(this.scene, 'option1');
+		group.add(this.scene, 'specialCamera');
 		group.add(this.scene, 'option2');
 
 		// add a slider
