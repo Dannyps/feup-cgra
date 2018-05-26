@@ -19,6 +19,13 @@ class LightingScene extends CGFscene
 
 		this.initCameras();
 
+		this.l0=false;
+		this.l1=false;
+		this.l2=false;
+		this.l3=false;
+		this.l4=true;
+
+
 		this.initLights();
 
 		this.specialCamera=false;
@@ -27,7 +34,6 @@ class LightingScene extends CGFscene
 		this.speed=3;
 		this.keysblocked=false;
 		this.cranetimer=0;
-
 
 		this.gl.clearColor(0.529, 0.808, 0.922, 1.0);
 		this.gl.clearDepth(100.0);
@@ -164,11 +170,13 @@ class LightingScene extends CGFscene
 		this.lights[0].setAmbient(0.3, 0.3, 0.3, 1);
 		this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
 		this.lights[0].setSpecular(1.0, 1.0, 0, 1.0);
-		//this.lights[0].enable();
+		if(this.l0)
+			this.lights[0].enable();
 
 		this.lights[1].setAmbient(0, 0, 0, 1);
 		this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
-		//this.lights[1].enable();
+		if(this.l1)
+			this.lights[1].enable();
 
 		this.lights[2].setAmbient(0, 0, 0, 1);
 		this.lights[2].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -176,7 +184,8 @@ class LightingScene extends CGFscene
 		this.lights[2].setConstantAttenuation(0.0);
 		this.lights[2].setLinearAttenuation(1.0);
 		this.lights[2].setQuadraticAttenuation(0.0);
-		//this.lights[2].enable();
+		if(this.l2)
+			this.lights[2].enable();
 
 		this.lights[3].setAmbient(0, 0, 0, 1);
 		this.lights[3].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -184,7 +193,8 @@ class LightingScene extends CGFscene
 		this.lights[3].setConstantAttenuation(0.0);
 		this.lights[3].setLinearAttenuation(0.0);
 		this.lights[3].setQuadraticAttenuation(0.2);
-		//this.lights[3].enable();
+		if(this.l3)
+			this.lights[3].enable();
 
 		this.lights[4].setAmbient(0.2, 0.2, 0.2, 0.1);
 		this.lights[4].setDiffuse(255/255, 240/255, 150/255, 1);
@@ -192,7 +202,8 @@ class LightingScene extends CGFscene
 		this.lights[4].setConstantAttenuation(0.0);
 		this.lights[4].setLinearAttenuation(0.05);
 		this.lights[4].setQuadraticAttenuation(0.0);
-		this.lights[4].enable();
+		if(this.l4)
+			this.lights[4].enable();
 	};
 
 	updateLights()
@@ -518,6 +529,33 @@ class LightingScene extends CGFscene
 			keysPressed=true;
 		}*/
 
+		// update lights
+
+		if(this.l0)
+			this.lights[0].enable();
+		else
+			this.lights[0].disable();
+
+		if(this.l1)
+			this.lights[1].enable();
+		else
+			this.lights[1].disable();
+			
+		if(this.l2)
+			this.lights[2].enable();
+		else
+			this.lights[2].disable();	
+
+		if(this.l3)
+			this.lights[3].enable();
+		else
+			this.lights[3].disable();	
+
+		if(this.l4)
+			this.lights[4].enable();
+		else
+			this.lights[4].disable();
+			
 		if (keysPressed)
 		console.log(text);
 	}

@@ -30,6 +30,17 @@ class MyInterface extends CGFinterface {
 
 		this.gui.add(this.scene, 'doSomething');	
 
+		// add a group of controls (and close by defult)
+
+		var lights=this.gui.addFolder("Lights");
+//		group.close();
+
+		lights.add(this.scene, "l0");
+		lights.add(this.scene, "l1");
+		lights.add(this.scene, "l2");
+		lights.add(this.scene, "l3");
+		lights.add(this.scene, "l4");
+
 		// add a group of controls (and open/expand by defult)
 
 		var group=this.gui.addFolder("Options");
