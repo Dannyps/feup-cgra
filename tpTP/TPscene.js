@@ -23,7 +23,7 @@ class TPscene extends CGFscene
 
         this.axis=new CGFaxis(this);
         this.floor = new MyFloor(this);
-        this.tp = new MyTrapPrism(this);
+        this.tp = new MyTrapPrism(this, 0.5, 2);
 
 
         // NOTE: OpenGL transformation matrices are transposed
