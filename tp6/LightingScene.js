@@ -60,7 +60,7 @@ class LightingScene extends CGFscene
 		this.grassAppearance.setDiffuse(0.7, 0.7, 0.7, 10);
 		this.grassAppearance.setSpecular(0,0,0,0);
         this.grassAppearance.setShininess(120);
-        this.grassAppearance.loadTexture("../resources/images/terrain2.png");
+        this.grassAppearance.loadTexture("../resources/images/terrain.png");
 
         this.wood = new CGFappearance(this);
 		this.wood.setAmbient(139/255*0.5,70/255*0.5,8/255*0.5,1);
