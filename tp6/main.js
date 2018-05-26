@@ -21,7 +21,6 @@ serialInclude([
 	'MyTerrain.js',
 	'MyVehicle.js',
 	'MyCrane.js',
-	'MyTest.js',
 	'MySemiSphere.js',
 
 	main=function() {
