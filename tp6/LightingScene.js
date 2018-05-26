@@ -187,10 +187,10 @@ class LightingScene extends CGFscene
 		//this.lights[3].enable();
 
 		this.lights[4].setAmbient(0.2, 0.2, 0.2, 0.1);
-		this.lights[4].setDiffuse(255/255, 183/255, 76/255, 1);
+		this.lights[4].setDiffuse(255/255, 240/255, 150/255, 1);
 		this.lights[4].setSpecular(0.1, 0.1, 0.1, 0);
 		this.lights[4].setConstantAttenuation(0.0);
-		this.lights[4].setLinearAttenuation(0.035);
+		this.lights[4].setLinearAttenuation(0.05);
 		this.lights[4].setQuadraticAttenuation(0.0);
 		this.lights[4].enable();
 	};
