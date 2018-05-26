@@ -40,8 +40,8 @@ class Plane extends CGFobject {
 	}
 
 	crossProduct(a, b) {
-		console.log("a:"+a);
-		console.log("b:"+b);
+		/*console.log("a:"+a);
+		console.log("b:"+b);*/
 
 		// Check lengths
 		if (a.length != 3 || b.length != 3) {
@@ -52,7 +52,7 @@ class Plane extends CGFobject {
 				a[2]*b[0] - a[0]*b[2],
 				a[0]*b[1] - a[1]*b[0]];
 
-		console.log(res);
+		//console.log(res);
 
 		return res;
 	}
@@ -102,6 +102,15 @@ class Plane extends CGFobject {
 		return normalFinal;
 	}
 
+	normalize(n){
+		let norm = Math.sqrt(n[0]*n[0]+n[1]*n[1]+n[2]*n[2]);
+		n[0]/=norm;
+		n[1]/=norm;
+		n[2]/=norm;
+
+		return n;
+	}
+
 	initBuffers() {
 		/* example for nrDivs = 3 :
 		(numbers represent index of point in vertices array)
@@ -140,20 +149,22 @@ class Plane extends CGFobject {
 			}
 			yCoord -= this.patchLength;
 		}
-		console.log(this.vertices);
 		for (var j = 0; j <= this.nrDivs; j++) {
 			var xCoord = -0.5;
 			for (var i = 0; i <= this.nrDivs; i++) {
 				if(i>0 && j > 0 && i < this.nrDivs && j < this.nrDivs){
 					//common case
-					console.log(i, j);
+					//console.log(i, j);
+					
 					let self = this.getVertex(i, j);
 					let vt = this.getVertex(i-1, j); // vertex left
 					let vb = this.getVertex(i+1, j); // vertex right
 					let vl = this.getVertex(i, j-1); // vertex top
 					let vr = this.getVertex(i, j+1); // vertex bottom
 					let normal = this.newell(self, vl, vr, vt, vb);
-					this.normals.push(normal[0]*10, normal[1]*10, normal[2]*10);
+					//console.log(self);
+					normal = this.normalize(normal);
+					this.normals.push(normal[0]*10, normal[1]*10, Math.abs(normal[2]*10));
 				}
 				else
 					this.normals.push(0,0,1);
