@@ -32,6 +32,7 @@ class MyVehicle extends CGFobject {
         this.facete = new Circle(this.scene, 30);
         this.rodatd = new MyCylinder(this.scene, 30, 10);
         this.facetd = new Circle(this.scene, 30);
+        this.farol = new MySemiSphere(this.scene, 30, 10);
 
         this.tyreText = new CGFappearance(this.scene);
         this.tyreText.loadTexture("../resources/images/tyre.png");
@@ -39,6 +40,13 @@ class MyVehicle extends CGFobject {
         this.tyreText.setDiffuse(0.2, 0.2, 0.2, 1);
         this.tyreText.setSpecular(0.6, 0.6, 0.6, 1);
         this.tyreText.setShininess(1);
+
+        this.carLight = new CGFappearance(this.scene);
+        this.carLight.loadTexture("../resources/images/car_light.png");
+        this.carLight.setAmbient(0.2,0.2,0.2,0.0);
+        this.carLight.setDiffuse(0.8, 0.8, 0.8, 1);
+        this.carLight.setSpecular(0.6, 0.6, 0.6, 1);
+        this.carLight.setShininess(1);
 
         this.tyre2Text = new CGFappearance(this.scene);
         this.tyre2Text.loadTexture("../resources/images/tyre2.png");
@@ -129,12 +137,25 @@ class MyVehicle extends CGFobject {
             this.scene.rotate(this.dir, 0, 1, 0);
 
 
-            this.scene.pushMatrix(); {
+            this.scene.pushMatrix();
+            {
                 this.scene.scale(5, 2, 2.5);
                 this.scene.translate(0, 0.5, 0);
                 this.cubo.display();
             }
+            this.scene.popMatrix();
 
+            this.scene.pushMatrix();
+            {
+                this.scene.rotate(Math.PI/2, 0, 1, 0);
+                this.scene.translate(1, 1.8, 2.5);
+                this.scene.scale(0.3, 0.3, 0.3);
+                this.carLight.apply();
+                this.farol.display();
+                this.scene.translate(-2/0.3, 0, 0);
+                this.farol.display();
+                
+            }
             this.scene.popMatrix();
 
             //rodas
