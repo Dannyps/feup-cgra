@@ -11,9 +11,11 @@ class MyVehicle extends CGFobject {
         this.x = 0;
         this.z = 0;
         this.dir = 0;
-        this.rdir = 0;
+        this.rodasrotdir = 0;
+        this.rodasdir = 0;
         this.mc = 0.3; // magic const
         this.carspeed=0;
+        this.rodasback=0;   // flag para as rodas voltarem po meio
 
         this.currentCamera=0;
         this.cameratx=0;
@@ -95,15 +97,16 @@ class MyVehicle extends CGFobject {
 
     };
 
-    turnRight(c) {
-      if(this.carspeed!=0){
-        this.dir -= c * this.mc * 0.1;
-      }
-    };
-
-    turnLeft(c) {
-      if(this.carspeed!=0){
-        this.dir += c * this.mc * 0.1;
+    updateDir() {
+      if(this.carspeed>0){
+        this.dir += this.rodasdir * this.mc * 0.1;
+      } else if(this.carspeed<0)
+        this.dir -= this.rodasdir * this.mc * 0.1;
+      if(this.rodasback){
+          if(this.rodasdir > 0)
+          this.rodasdir -= 0.01*Math.abs(this.carspeed);
+          else if(this.rodasdir < 0)
+          this.rodasdir += 0.01*Math.abs(this.carspeed);
       }
     };
 
@@ -116,14 +119,25 @@ class MyVehicle extends CGFobject {
         this.rotateBack(speed);
     };
 
+    setPosition(x,z){
+        this.x = x;
+        this.z = z;
+    };
 
+    setRotation(angle){
+        this.dir=angle;
+    };
 
     rotateFront(speed){
-        this.rdir -= this.mc * speed * 0.5;
+        this.rodasrotdir -= this.mc * speed * 0.5;
     }
 
     rotateBack(speed){
-        this.rdir-= this.mc * speed * 0.5;
+        this.rodasrotdir-= this.mc * speed * 0.5;
+    }
+
+    incRodasdir(angle){
+        this.rodasdir+=angle;
     }
 
     display() {
@@ -134,8 +148,9 @@ class MyVehicle extends CGFobject {
         this.scene.pushMatrix(); {
 
             this.scene.translate(this.x, 0, this.z);
+            this.scene.translate(-1.2,0,0);
             this.scene.rotate(this.dir, 0, 1, 0);
-
+            this.scene.translate(1.2,0,0);
 
             this.scene.pushMatrix();
             {
@@ -164,8 +179,9 @@ class MyVehicle extends CGFobject {
                 this.scene.pushMatrix(); {
                     this.scene.translate(0, 1, 0);
                     this.scene.translate(2.5, 0, -1.25);
-                        this.scene.rotate(this.rdir, 0, 0, 1);
-                        this.tyre2Text.apply();
+                    this.scene.rotate(this.rodasdir,0,1,0);
+                    this.scene.rotate(this.rodasrotdir, 0, 0, 1);
+                    this.tyre2Text.apply();
                     this.rodafe.display();
                     this.scene.translate(0, 0, -0.5);
                     this.scene.rotate(Math.PI, 1, 0, 0);
@@ -180,7 +196,8 @@ class MyVehicle extends CGFobject {
                 this.scene.pushMatrix(); {
                     this.scene.translate(0, 1, 0);
                     this.scene.translate(2.5, 0, 1.25);
-                        this.scene.rotate(this.rdir, 0, 0, 1);
+                    this.scene.rotate(this.rodasdir,0,1,0);
+                        this.scene.rotate(this.rodasrotdir, 0, 0, 1);
                         this.tyre2Text.apply();
                     this.rodafd.display();
                     this.scene.translate(0, 0, 0.5);
@@ -195,7 +212,7 @@ class MyVehicle extends CGFobject {
                 this.scene.pushMatrix(); {
                     this.scene.translate(0, 1, 0);
                     this.scene.translate(-2.5, 0, -1.25);
-                        this.scene.rotate(this.rdir, 0, 0, 1);
+                        this.scene.rotate(this.rodasrotdir, 0, 0, 1);
                         this.tyre2Text.apply();
                     this.rodate.display();
                     this.scene.translate(0, 0, -0.5);
@@ -209,7 +226,7 @@ class MyVehicle extends CGFobject {
                 this.scene.pushMatrix(); {
                     this.scene.translate(0, 1, 0);
                     this.scene.translate(-2.5, 0, 1.25);
-                        this.scene.rotate(this.rdir, 0, 0, 1);
+                        this.scene.rotate(this.rodasrotdir, 0, 0, 1);
                         this.tyre2Text.apply();
                     this.rodatd.display();
                     this.scene.translate(0, 0, 0.5);
@@ -230,6 +247,9 @@ class MyVehicle extends CGFobject {
 
     update(time)
     {
+
+        this.updateDir();
+
         this.cameratimer++;
       this.move(this.carspeed);
 

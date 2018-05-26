@@ -10,8 +10,7 @@ class MyCrane extends CGFobject {
 
         this.x = 0;
         this.z = 0;
-        this.dir = 0;
-        this.rdir = 0;
+        this.cardir = 0;
         this.anglebase = 0;
         this.bracorot = Math.PI/3;
         this.rotY = 0;      //  0 no eixo dos x
@@ -19,8 +18,10 @@ class MyCrane extends CGFobject {
         this.braco2size = 4;
         this.imanraio = 1.5;
         this.fiosize = 3;
-
         this.carlocked=false;
+        this.cardropY=0;
+        this.dropvelocity=0;
+
 
         this.carro= new MyVehicle(scene);
 
@@ -188,6 +189,7 @@ class MyCrane extends CGFobject {
                 this.face.display();
                 this.scene.translate(0,0,-1);
                 this.scene.rotate(Math.PI,1,0,0);
+
                 this.face.display();
             this.scene.popMatrix();
 
@@ -195,7 +197,9 @@ class MyCrane extends CGFobject {
 
             if(this.carlocked){
             this.scene.pushMatrix();
-                this.scene.translate(-this.braco1size*Math.sin(this.anglebase)+0.2 + this.braco2size*Math.cos(this.bracorot),this.braco1size*Math.cos(this.anglebase)+0.3 - this.braco2size*Math.sin(this.bracorot)-5,0);
+                this.scene.translate(-this.braco1size*Math.sin(this.anglebase)+0.2 + this.braco2size*Math.cos(this.bracorot),this.braco1size*Math.cos(this.anglebase)+0.3 - this.braco2size*Math.sin(this.bracorot)-5+this.cardropY,0);
+                //this.scene.translate(this.carrox+0.7,0,this.carroz+19.2);
+                this.scene.rotate(Math.PI/2+this.cardir,0,1,0);
                 this.carro.display();
             this.scene.popMatrix();
             }
@@ -206,9 +210,11 @@ class MyCrane extends CGFobject {
 
 
 
-    update(timer,carrox,carroz,carspeed)
+    update(time, timer,carrox,carroz,carspeed,cardir)
     {
-        if(carrox<1 && carrox>-2 && carroz>-21 && carroz<-18 && carspeed<0.5){
+
+        
+        if(carrox<1 && carrox>-1 && carroz>-21 && carroz<-19 && carspeed<0.3){
             if(timer>0 && timer < 160)
             this.braco1size+=0.04;
             if(timer>30 && timer < 160)
@@ -222,14 +228,28 @@ class MyCrane extends CGFobject {
             this.bracorot-=0.005;
             }
             if(timer == 480){
+                this.carrox=carrox;
+                this.carroz=carroz;
+                this.cardir=cardir;
                 this.carlocked=true;
             }
             if(timer > 540 && timer < 650){
             this.anglebase+=0.005;
-            this.bracorot+=0.005
+            this.bracorot+=0.005;
             }
-            if(timer > 600){
+            if(timer > 600 && timer < 900){
                 this.rotY-=0.005;
+            this.bracorot-=0.002;
+            }
+            if(timer > 950 && (this.braco1size*Math.cos(this.anglebase)+0.3 - this.braco2size*Math.sin(this.bracorot)-5+this.cardropY) > 0){
+                this.dropvelocity+=time;
+                this.cardropY-=this.dropvelocity;
+            }
+            if(timer > 950 && (this.braco1size*Math.cos(this.anglebase)+0.3 - this.braco2size*Math.sin(this.bracorot)-5+this.cardropY) <= 0){
+                console.log("dentro if");
+                this.carlocked=false;
+                this.scene.keysblocked=false;
+                this.scene.setCarPosition(-this.braco1size*Math.sin(this.anglebase)+0.2 + this.braco2size*Math.cos(this.bracorot),0);
             }
 
             

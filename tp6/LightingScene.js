@@ -139,7 +139,7 @@ class LightingScene extends CGFscene
 
 	initCameras()
 	{
-		this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(30, 30, 30), vec3.fromValues(0, 0, 0));
+		this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(1, 500, 1), vec3.fromValues(0, 0, 0));
 	};
 
 	initLights()
@@ -243,6 +243,7 @@ class LightingScene extends CGFscene
 		//Carro
 
 		if(!this.crane.carlocked){
+			console.log("dentro display carro");
 		this.pushMatrix();
 		this.materialDefault.apply();
 			this.translate(13,0,6);
@@ -255,6 +256,7 @@ class LightingScene extends CGFscene
 		
 		this.pushMatrix();
 			this.materialDefault.apply();
+			this.translate(2,2.5,0);
 			this.crane.display();
 		this.popMatrix();
 		
@@ -286,14 +288,18 @@ class LightingScene extends CGFscene
 			this.cyl.display();
 		this.popMatrix();
 */
+
 		// Floor
+		/*
 		this.pushMatrix();
 			//this.translate(7.5, 0, 7.5);
 			this.rotate(-90 * degToRad, 1, 0, 0);
 			this.scale(45, 45, 0.2);
 			this.grassAppearance.apply();
 			this.floor.display();
-		this.popMatrix();
+		this.popMatrix();*/
+		
+
 /*
 		// Left Wall
 		this.pushMatrix();
@@ -393,7 +399,7 @@ class LightingScene extends CGFscene
 		var keysPressed=false;
 
 		//	CARRO KEYS
-		
+		this.carro.rodasback=true;
 		if(!this.keysblocked){
 		if (this.gui.isKeyPressed("KeyW")){
 			this.carro.incSpeed(0.1);
@@ -409,13 +415,17 @@ class LightingScene extends CGFscene
 
 		if (this.gui.isKeyPressed("KeyD")){
 			text+=" D ";
-			this.carro.turnRight(this.speed);
+			if(this.carro.rodasdir > -Math.PI*3/8)
+			this.carro.incRodasdir(-0.1);
+			//this.carro.turnRight(this.speed);
 			keysPressed=true;
 		}
 
 		if (this.gui.isKeyPressed("KeyA")){
 			text+=" A ";
-			this.carro.turnLeft(this.speed);
+			if(this.carro.rodasdir < Math.PI*3/8)
+			this.carro.incRodasdir(0.1);
+			//this.carro.turnLeft(this.speed);
 			keysPressed=true;
 		}
 		}
@@ -444,12 +454,14 @@ class LightingScene extends CGFscene
 
 		if (this.gui.isKeyPressed("KeyW")){
 			text+=" W ";
+			//this.crane.incBracosrot(-0.01);
 			this.crane.incBraco2rot(0.01);
 			keysPressed=true;
 		}
 
 		if (this.gui.isKeyPressed("KeyS")){
 			text+=" S ";
+			//this.crane.incBracosrot(0.01);
 			this.crane.incBraco2rot(-0.01);
 			keysPressed=true;
 		}
@@ -475,7 +487,7 @@ class LightingScene extends CGFscene
 		if (this.gui.isKeyPressed("KeyF")){
 			text+=" F ";
 			this.crane.incBraco1length(-0.05);
-			keysPressed=true;
+			keysPressed=true 
 		}
 
 		if (this.gui.isKeyPressed("KeyC")){
@@ -489,7 +501,7 @@ class LightingScene extends CGFscene
 			this.crane.incBraco2length(-0.05);
 			keysPressed=true;
 		}
-		*/
+*/
 
 		//		TRAVAO?
 		
@@ -560,10 +572,14 @@ class LightingScene extends CGFscene
 		console.log(text);
 	}
 
+    setCarPosition(x,z){
+        this.carro.setPosition(x,z);
+    }
+
 	update(currTime)
 	{
 		this.cranetimer++;
-		if(this.carro.x<1 && this.carro.x>-2 && this.carro.z>-21 && this.carro.z<-18 && this.carro.carspeed<0.5 && this.keysblocked!=true){	//speed < 1
+		if(this.carro.x<1 && this.carro.x>-1 && this.carro.z>-21 && this.carro.z<-19 && this.carro.carspeed<0.3 && this.keysblocked!=true && this.cranetimer < 900){	//speed < 1
 			this.cranetimer=0;
 			this.keysblocked=true;
 		}
