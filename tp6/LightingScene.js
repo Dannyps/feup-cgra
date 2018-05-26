@@ -21,8 +21,7 @@ class LightingScene extends CGFscene
 
 		this.initLights();
 
-		this.specialCamera=true;
-		this.option1=true;
+		this.specialCamera=false;
 		this.option2=true;
 		this.showAxis=false;
 		this.speed=3;
@@ -42,16 +41,17 @@ class LightingScene extends CGFscene
 		this.carro = new MyVehicle(this);
 		this.crane = new MyCrane(this);
 
-		let altimetry =[[ 2.0 , 3.0 , 2.0, 4.0, 2.5, 2.4, 2.3, 1.3 ],
-						[ 2.0 , 3.0 , 2.0, 4.0, 7.5, 6.4, 4.3, 1.3 ],
-						[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
-						[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
-						[ 0.0 , 0.0 , 2.0, 4.0, 2.5, 2.4, 0.0, 0.0 ],
-						[ 0.0 , 0.0 , 2.0, 4.0, 3.5, 2.4, 0.0, 0.0 ],
-						[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
-						[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
-						[ 2.0 , 3.0 , 2.0, 1.0, 2.5, 2.4, 2.3, 1.3 ]
+		let altimetry= [[ 2.0 , 3.0 , 2.0, 4.0, 2.5, 2.4, 2.3, 1.3, 0.0 ],
+						[ 2.0 , 3.0 , 2.0, 4.0, 7.5, 6.4, 4.3, 1.3, 0.0 ],
+						[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
+						[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
+						[ 0.0 , 0.0 , 2.0, 4.0, 2.5, 2.4, 0.0, 0.0, 0.0 ],
+						[ 0.0 , 0.0 , 2.0, 4.0, 3.5, 2.4, 0.0, 0.0, 0.0 ],
+						[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
+						[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ],
+						[ 2.0 , 3.0 , 2.0, 1.0, 2.5, 2.4, 2.3, 1.3, 0.0 ]
 						];
+		
 
 		this.floor = new MyTerrain(this, 8, altimetry);
 
@@ -59,8 +59,8 @@ class LightingScene extends CGFscene
 		this.materialDefault = new CGFappearance(this);
 
 		this.grassAppearance = new CGFappearance(this);
-		this.grassAppearance.setAmbient(0.4, 0.5, 0.05, 1);
-		this.grassAppearance.setDiffuse(0.4, 0.5, 0.05, 1);
+		this.grassAppearance.setAmbient(0.4, 0.4, 0.4, 1);
+		this.grassAppearance.setDiffuse(0.7, 0.7, 0.7, 10);
 		this.grassAppearance.setSpecular(0,0,0,0);
         this.grassAppearance.setShininess(120);
         this.grassAppearance.loadTexture("../resources/images/terrain.png");
@@ -142,19 +142,19 @@ class LightingScene extends CGFscene
 
 		// Positions for four lights
 		this.lights[0].setPosition(4, 6, 1, 1);
-		this.lights[0].setVisible(true); // show marker on light position (different from enabled)
+		this.lights[0].setVisible(false); // show marker on light position (different from enabled)
 
 		this.lights[1].setPosition(10.5, 6.0, 1.0, 1.0);
-		this.lights[1].setVisible(true); // show marker on light position (different from enabled)
+		this.lights[1].setVisible(false); // show marker on light position (different from enabled)
 
 		this.lights[2].setPosition(10.5, 6.0, 5.0, 1.0);
-		this.lights[2].setVisible(true); // show marker on light position (different from enabled)
+		this.lights[2].setVisible(false); // show marker on light position (different from enabled)
 
 		this.lights[3].setPosition(4, 6, 5, 1);
-		this.lights[3].setVisible(true); // show marker on light position (different from enabled)
+		this.lights[3].setVisible(false); // show marker on light position (different from enabled)
 
-		this.lights[4].setPosition(0.4, 6, 8, 1);
-		this.lights[4].setVisible(false); // show marker on light position (different from enabled)
+		this.lights[4].setPosition(0, 15, 0, 1);
+		this.lights[4].setVisible(true); // show marker on light position (different from enabled)
 
 		//this.lights[2].setPosition(10.5, 6.0, 5.0, 1.0);
 		//this.lights[1].setVisible(true); // show marker on light position (different from enabled)
@@ -186,9 +186,12 @@ class LightingScene extends CGFscene
 		this.lights[3].setQuadraticAttenuation(0.2);
 		//this.lights[3].enable();
 
-		this.lights[4].setAmbient(1, 1, 1, 1);
-		this.lights[4].setDiffuse(2, 2, 2/1.5, 1.0);
-		this.lights[4].setSpecular(0.5, 0.5, 0.5/3, 1.0);
+		this.lights[4].setAmbient(0.2, 0.2, 0.2, 0.1);
+		this.lights[4].setDiffuse(255/255, 183/255, 76/255, 1);
+		this.lights[4].setSpecular(0.1, 0.1, 0.1, 0);
+		this.lights[4].setConstantAttenuation(0.0);
+		this.lights[4].setLinearAttenuation(0.035);
+		this.lights[4].setQuadraticAttenuation(0.0);
 		this.lights[4].enable();
 	};
 
@@ -230,7 +233,9 @@ class LightingScene extends CGFscene
 
 		if(!this.crane.carlocked){
 		this.pushMatrix();
-			this.materialDefault.apply();
+		this.materialDefault.apply();
+			this.translate(13,0,6);
+			this.rotate(0, 0, Math.PI/2, 1);
 			this.carro.display();
 		this.popMatrix();
 		}
@@ -535,6 +540,12 @@ class LightingScene extends CGFscene
 		//this.clock.update(this.time);
 		//this.plane.update(this.time);
 		this.carro.update(this.time);
+		if(this.specialCamera){
+			this.camera.setTarget(vec3.fromValues(this.carro.cameratx,1, this.carro.cameratz));
+			this.camera.setPosition(vec3.fromValues(this.carro.camerax,this.carro.cameray,this.carro.cameraz));
+		}else{
+
+		}
 		this.crane.update(this.cranetimer,this.carro.x,this.carro.z,this.carro.carspeed);
 		//this.camera.setTarget(vec3.fromValues(this.carro.cameratx,1, this.carro.cameratz));
 		//this.camera.setPosition(vec3.fromValues(this.carro.camerax,this.carro.cameray,this.carro.cameraz));
