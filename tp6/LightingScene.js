@@ -139,7 +139,7 @@ class LightingScene extends CGFscene
 
 	initCameras()
 	{
-		this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(1, 500, 1), vec3.fromValues(0, 0, 0));
+		this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(30, 30, 30), vec3.fromValues(0, 0, 0));
 	};
 
 	initLights()
@@ -290,14 +290,14 @@ class LightingScene extends CGFscene
 */
 
 		// Floor
-		/*
+		
 		this.pushMatrix();
 			//this.translate(7.5, 0, 7.5);
 			this.rotate(-90 * degToRad, 1, 0, 0);
 			this.scale(45, 45, 0.2);
 			this.grassAppearance.apply();
 			this.floor.display();
-		this.popMatrix();*/
+		this.popMatrix();
 		
 
 /*
