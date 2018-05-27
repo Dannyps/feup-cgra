@@ -62,7 +62,7 @@ class MyInterface extends CGFinterface {
         sa.setValue(true);
 
 		// Choose from named values
-		group.add(this.scene, 'carText', { Zero: 0, One: 1 } );
+		group.add(this.scene, 'carText', { Camo: 0, Ambulance: 1 } );
 
         this.initKeys();
 
