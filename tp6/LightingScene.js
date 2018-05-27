@@ -25,6 +25,8 @@ class LightingScene extends CGFscene
 		this.l3=false;
 		this.l4=true;
 
+		this.carText=0;
+
 
 		this.initLights();
 
