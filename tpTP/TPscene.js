@@ -25,6 +25,8 @@ class TPscene extends CGFscene
         this.floor = new MyFloor(this);
         this.tp = new MyTrapPrism(this, 0.5, 2);
 
+        this.sphere = new MySphere(this, 50, 30, 1, 1);
+
 
         // NOTE: OpenGL transformation matrices are transposed
 
@@ -63,7 +65,7 @@ class TPscene extends CGFscene
 		this.grassAppearance.setDiffuse(0.7, 0.7, 0.7, 10);
 		this.grassAppearance.setSpecular(0,0,0,0);
         this.grassAppearance.setShininess(120);
-        this.grassAppearance.loadTexture("../resources/images/text.png");
+        //this.grassAppearance.loadTexture("../resources/images/text.png");
         this.enableTextures(true);
 
 
@@ -123,7 +125,8 @@ class TPscene extends CGFscene
         //this.floor.display();
         this.translate(2, 3, 2);
         this.grassAppearance.apply();
-        this.tp.display();
+        this.sphere.display();
+        
         
         
         // ---- END Primitive drawing section
