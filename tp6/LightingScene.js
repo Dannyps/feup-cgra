@@ -19,10 +19,10 @@ class LightingScene extends CGFscene
 
 		this.initCameras();
 
-		this.l0=false;
-		this.l1=false;
-		this.l2=false;
-		this.l3=false;
+		this.l0=true;
+		this.l1=true;
+		this.l2=true;
+		this.l3=true;
 		this.l4=true;
 
 		this.carText=0;

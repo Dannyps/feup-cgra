@@ -14,8 +14,8 @@ class MyTrapPrism extends CGFobject
         this.l = left;
         this.r = right;
 
-        this.betaL = Math.PI/2-(Math.acos((this.l)/(this.l*this.l+1)));
-        this.betaR = Math.PI/2-(Math.acos((this.r)/(this.r*this.r+1)));
+        this.betaL = Math.PI/2-(Math.acos(Math.sqrt((this.l)/(this.l*this.l+1))));
+        this.betaR = Math.PI/2-(Math.acos(Math.sqrt((this.r)/(this.r*this.r+1))));
         
         this.initBuffers();
         
@@ -250,8 +250,8 @@ class MyTrapPrism extends CGFobject
 
             // right triangle front face
             2/3, 1/2,            // 1    (22) 
-            2/3, 1/4,            // 2    (23) 
-            7/9, 1/4,            // 8    (24) 
+            2/3, 3/4,            // 2    (23) 
+            7/9, 1/2,            // 8    (24) 
 
             // right triangle back face
             7/9, 1/4,            // 9    (25) 

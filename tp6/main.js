@@ -22,6 +22,7 @@ serialInclude([
 	'MyVehicle.js',
 	'MyCrane.js',
 	'MySemiSphere.js',
+	'MyTrapPrism.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);
