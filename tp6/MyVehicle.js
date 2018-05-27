@@ -58,6 +58,36 @@ class MyVehicle extends CGFobject {
         this.tyre2Text.setSpecular(0,0,0, 1);
         this.tyre2Text.setShininess(1);
 
+        this.bodyText = [];
+        this.bodyText[0] = new CGFappearance(this.scene);
+        this.bodyText[0].loadTexture("../resources/images/camo.png");
+        this.bodyText[0].setAmbient(0.3,0.2,0.2,0.0);
+        this.bodyText[0].setDiffuse(0.4, 0.3, 0.3, 1);
+        this.bodyText[0].setSpecular(0,0,0, 1);
+        this.bodyText[0].setShininess(1);
+
+        this.bodyText[1] = new CGFappearance(this.scene);
+        this.bodyText[1].loadTexture("../resources/images/ambulance.png");
+        this.bodyText[1].setAmbient(0.3,0.2,0.2,0.0);
+        this.bodyText[1].setDiffuse(0.8, 0.8, 0.8, 1);
+        this.bodyText[1].setSpecular(0,0,0, 1);
+        this.bodyText[1].setShininess(1);
+
+        this.body2Text = [];
+        this.body2Text[0] = new CGFappearance(this.scene);
+        this.body2Text[0].loadTexture("../resources/images/camo2.png");
+        this.body2Text[0].setAmbient(0.3,0.2,0.2,0.0);
+        this.body2Text[0].setDiffuse(0.4, 0.3, 0.3, 1);
+        this.body2Text[0].setSpecular(0,0,0, 1);
+        this.body2Text[0].setShininess(1);
+
+        this.body2Text[1] = new CGFappearance(this.scene);
+        this.body2Text[1].loadTexture("../resources/images/car_light.png");
+        this.body2Text[1].setAmbient(0,0,0,0.0);
+        this.body2Text[1].setDiffuse(0.8, 0.3, 0.3, 1);
+        this.body2Text[1].setSpecular(0,0,0, 1);
+        this.body2Text[1].setShininess(1);
+
     };
 
     incSpeed(aceleration){
@@ -142,7 +172,7 @@ class MyVehicle extends CGFobject {
     }
 
     display() {
-
+        let i = this.scene.carText;
         let c = 0.5;
         /*console.log(this.scene.getUpdatePeriod());
         debugger;
@@ -159,6 +189,7 @@ class MyVehicle extends CGFobject {
             {
                 this.scene.scale(5, 1.5, 1);
                 this.scene.translate(0, 1, 0);
+                this.body2Text[i].apply();
                 this.cubo.display();
             }
             this.scene.popMatrix();
@@ -191,6 +222,9 @@ class MyVehicle extends CGFobject {
                     this.scene.rotate(Math.PI, 1, 0, 0);
                     this.tyreText.apply();
                     this.facefe.display();
+                    this.scene.rotate(Math.PI, 1, 0, 0);
+                    this.scene.translate(0, 0, 1);
+                    this.facefe.display();
                     this.scene.materialDefault.apply();
 
                 }
@@ -207,6 +241,9 @@ class MyVehicle extends CGFobject {
                     this.rodafd.display();
                     this.scene.translate(0, 0, 0.5);
                     this.tyreText.apply();
+                    this.facefd.display();
+                    this.scene.rotate(Math.PI, 1, 0, 0);
+                    this.scene.translate(0, 0, 1);
                     this.facefd.display();
                     this.scene.materialDefault.apply();
 
@@ -225,6 +262,9 @@ class MyVehicle extends CGFobject {
                     this.scene.rotate(Math.PI, 1, 0, 0);
                     this.tyreText.apply();
                     this.facete.display();
+                    this.scene.rotate(Math.PI, 1, 0, 0);
+                    this.scene.translate(0, 0, 1);
+                    this.facete.display();
                     this.scene.materialDefault.apply();
                 }
                 this.scene.popMatrix();
@@ -239,6 +279,9 @@ class MyVehicle extends CGFobject {
                     this.scene.translate(0, 0, 0.5);
                     this.tyreText.apply();
                     this.facetd.display();
+                    this.scene.rotate(Math.PI, 1, 0, 0);
+                    this.scene.translate(0, 0, 1);
+                    this.facetd.display();
                     this.scene.materialDefault.apply();
                 }
 
@@ -250,6 +293,7 @@ class MyVehicle extends CGFobject {
         {
             this.scene.translate(-0.4, 1.5, 1);
             this.scene.scale(2.8, 1.5, 1);
+            this.bodyText[i].apply();
             this.sides.display();
             this.scene.translate(0, 0, -2);
             this.sides.display();
